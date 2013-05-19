@@ -117,7 +117,7 @@ Implemented forEach statement
         var myArray = [1, 2, 3, 4, "James"];
         myArray.forEach( function(element, array_index, array_object)
         {
-                console.log(element);
+                alert(element);
                 // 1
                 // 2
                 // 3
