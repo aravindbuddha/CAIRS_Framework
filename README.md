@@ -22,10 +22,7 @@ Code Injection
         CAIRS.loadScript("controller/FlexPaperComponent", function()
         {
         	// after code injected, call the component FlexPaperComponent
-        	FlexPaperComponent.callFlexPaper(
-                {
-                        
-                });   
+        	FlexPaperComponent.callFlexPaper({ ... });
         });
 
 
