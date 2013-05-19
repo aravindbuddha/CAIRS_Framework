@@ -104,3 +104,22 @@ Check if variable is an Object literal
 
         var test = {};
         CAIRS.isObject( test ); // true
+        
+        
+Check if variable is a Number
+
+        var test = 2;
+        CAIRS.isNumber( test ); // true
+        
+        
+Implemented forEach statement
+
+        [1, 2, 3, 4, "James"].forEach( function(element, array_index, array_object)
+        {
+                console.log(element);
+                // 1
+                // 2
+                // 3
+                // 4
+                // James
+        });
