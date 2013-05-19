@@ -240,8 +240,20 @@ var CAIRS = {
 			var index = dataString.indexOf(this.versionSearchString);
 			if (index == -1) return;
 			return parseFloat(dataString.substring(index+this.versionSearchString.length+1));
-		},
-		dataBrowser: 
+		}
+		,isPlugin : function(which_plugin)
+		{
+			(typeof which_plugin === 'undefined') ? which_plugin = "notspecified" : "";
+			for(var plugin in CAIRS.Browser.plugins)
+			{
+				(typeof CAIRS.Browser.plugins[plugin].name === 'undefined') ? CAIRS.Browser.plugins[plugin].name = "Unknow plugin" : "";
+				var regex = new RegExp( ""+which_plugin.toString()+"", "g" );
+				if(CAIRS.Browser.plugins[plugin].name.match( regex ))
+					return true;
+			}
+			return false;
+		}
+		,dataBrowser: 
 		[
 			{
 				string: navigator.userAgent,
