@@ -86,3 +86,10 @@ Some plugin names
         Shockwave Flash
         Java Deployment Toolkit 6.0.380.5
         Unknow plugin
+
+
+Check if browser have the minimun requirement for running RIA apps
+
+        CAIRS.self.checkBrowserStuff();
+        
+        //=== Note, this method is automatically called when you call CAIRS.init();
