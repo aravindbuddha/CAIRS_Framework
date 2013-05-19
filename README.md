@@ -30,7 +30,7 @@ Convert JSON to XML
 
         var json_menu = { menu: [
                 { item : { id: "recarregagrid", text : "reload", img : "atualizar.png", imgdis : "atualizar.png"}, child : [
-                        { item : { id: "file_sep_0", text : "select all", img : "select_all.gif", imgdis : "select_all.gif"} }
+                        { item : { id: "select_all", text : "select all", img : "select_all.gif", imgdis : "select_all.gif"} }
                 ] }
                 ,{ item : { id: "file_sep_1", type : "separator"} }
                 ,{ item : { id: "selecionartodos", text : "select all", img : "select_all.gif", imgdis : "select_all.gif"} }
@@ -44,10 +44,10 @@ Convert JSON to XML
         
         <menu>
                 <item id="recarregagrid" text="reload" img="atualizar.png" imgdis="atualizar.png">
-                        <item id="select" text="select all" img="select_all.gif" imgdis="select_all.gif"/>
+                        <item id="select_all" text="select all" img="select_all.gif" imgdis="select_all.gif"/>
                 </item>
-        	<item id="file_sep_1" type="separator"/>
-        	<item id="selecionartodos" text="select all" img="select_all.gif" imgdis="select_all.gif"/>
-        	<item id="file_sep_2" type="separator"/>
-        	<item id="excluir" text="delete selected" img="excluir.png" imgdis="excluir.png"/>
+                <item id="file_sep_1" type="separator"/>
+                <item id="selecionartodos" text="select all" img="select_all.gif" imgdis="select_all.gif"/>
+                <item id="file_sep_2" type="separator"/>
+                <item id="excluir" text="delete selected" img="excluir.png" imgdis="excluir.png"/>
         </menu> 
