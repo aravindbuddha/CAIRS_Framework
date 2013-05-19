@@ -568,6 +568,9 @@ var CAIRS = {
 	  return !isNaN(parseFloat(n)) && isFinite(n);
 	}
 	
+	/**
+		@object xml - provides xml manipulation
+	*/
 	,xml : {
 		/**
 		
