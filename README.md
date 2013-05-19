@@ -19,10 +19,10 @@ Browser handling
 Code Injection
 
         // injects controller/FlexPaperComponent.js
-	CAIRS.loadScript("controller/FlexPaperComponent", function() 
-	{
-		// after code injected, call the component FlexPaperComponent           
-                FlexPaperComponent.callFlexPaper(
+        CAIRS.loadScript("controller/FlexPaperComponent", function()
+        {
+        	// after code injected, call the component FlexPaperComponent
+        	FlexPaperComponent.callFlexPaper(
                 {
                         
                 });   
