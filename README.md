@@ -50,4 +50,8 @@ Convert JSON to XML
                 <item id="selecionartodos" text="select all" img="select_all.gif" imgdis="select_all.gif"/>
                 <item id="file_sep_2" type="separator"/>
                 <item id="excluir" text="delete selected" img="excluir.png" imgdis="excluir.png"/>
-        </menu> 
+        </menu>
+        
+XML Serialization
+
+        CAIRS.xml.serialize( CAIRS.xml.fromJSON( json_menu ) )
