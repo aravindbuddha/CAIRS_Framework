@@ -71,7 +71,7 @@ Check if plugin is installed
 
         CAIRS.Browser.isPlugin( "Chrome PDF Viewer" ); // true/false
         
-Plugin name examples
+Some plugin names
 
         Shockwave Flash
         Chrome Remote Desktop Viewer
