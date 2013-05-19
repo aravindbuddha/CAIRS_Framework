@@ -40,7 +40,7 @@ Convert JSON to XML
         
         CAIRS.xml.fromJSON( json_menu );
         
-        ==== RESULT
+        XXXXX====   RESULT  ==== XXXXX
         
         <menu>
                 <item id="recarregagrid" text="reload" img="atualizar.png" imgdis="atualizar.png">
