@@ -90,6 +90,6 @@ Some plugin names
 
 Check if browser have the minimun requirement for running RIA apps
 
-        CAIRS.self.checkBrowserStuff();
+        CAIRS.checkBrowserStuff();
         
         //=== Note, this method is automatically called when you call CAIRS.init();
