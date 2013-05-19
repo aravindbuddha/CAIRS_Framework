@@ -93,3 +93,14 @@ Check if browser have the minimun requirement for running RIA apps
         CAIRS.checkBrowserStuff();
         
         //=== Note, this method is automatically called when you call CAIRS.init();
+        
+Check if variable is an Array
+
+        var test = [];
+        CAIRS.isArray( test ); // true
+        
+
+Check if variable is an Object literal
+
+        var test = {};
+        CAIRS.isObject( test ); // true
