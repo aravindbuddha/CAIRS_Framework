@@ -44,7 +44,7 @@ Convert JSON to XML
         
         <menu>
                 <item id="recarregagrid" text="reload" img="atualizar.png" imgdis="atualizar.png">
-                        <item id="select_all" text="select all" img="select_all.gif" imgdis="select_all.gif"/>
+                        <item id="select" text="select all" img="select_all.gif" imgdis="select_all.gif"/>
                 </item>
         	<item id="file_sep_1" type="separator"/>
         	<item id="selecionartodos" text="select all" img="select_all.gif" imgdis="select_all.gif"/>
