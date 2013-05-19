@@ -39,3 +39,15 @@ Convert JSON to XML
          ] }
         
         CAIRS.xml.fromJSON( json_menu );
+        
+        ==== RESULT
+        
+        <menu>
+                <item id="recarregagrid" text="reload" img="atualizar.png" imgdis="atualizar.png">
+                        <item id="file_sep_0" text="select all" img="select_all.gif" imgdis="select_all.gif"/>
+                </item>
+        	<item id="file_sep_1" type="separator"/>
+        	<item id="selecionartodos" text="select all" img="select_all.gif" imgdis="select_all.gif"/>
+        	<item id="file_sep_2" type="separator"/>
+        	<item id="excluir" text="delete selected" img="excluir.png" imgdis="excluir.png"/>
+        </menu> 
