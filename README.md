@@ -65,3 +65,24 @@ XML Serialization
         <item id="selecionartodos" text="select all" img="select_all.gif" imgdis="select_all.gif"/>
         <item id="file_sep_2" type="separator"/>
         <item id="excluir" text="delete selected" img="excluir.png" imgdis="excluir.png"/></menu>'
+
+
+Check if plugin is installed
+
+        CAIRS.Browser.isPlugin( "Chrome PDF Viewer" ); // true/false
+        
+Plugin name examples
+
+        Shockwave Flash
+        Chrome Remote Desktop Viewer
+        Native Client
+        Chrome PDF Viewer
+        Adobe Acrobat 
+        Winamp Application Detector
+        Google Earth Plugin
+        Google Update
+        Java(TM) Platform SE 6 U38
+        Facebook Video Calling Plugin
+        Shockwave Flash
+        Java Deployment Toolkit 6.0.380.5
+        Unknow plugin
