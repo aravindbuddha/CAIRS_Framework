@@ -1,9 +1,12 @@
 CAIRS Framework
 ===============
 
+Init Framework
 
         CAIRS.init();
 
+
+Browser handling
 
         alert( CAIRS.Browser.name ); // Chrome
         alert( CAIRS.Browser.onLine ); // is the browser online?
