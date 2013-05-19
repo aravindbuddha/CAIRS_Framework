@@ -114,7 +114,8 @@ Check if variable is a Number
         
 Implemented forEach statement
 
-        [1, 2, 3, 4, "James"].forEach( function(element, array_index, array_object)
+        var myArray = [1, 2, 3, 4, "James"];
+        myArray.forEach( function(element, array_index, array_object)
         {
                 console.log(element);
                 // 1
