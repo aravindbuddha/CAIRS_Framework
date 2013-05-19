@@ -6,7 +6,7 @@ Init Framework
         CAIRS.init();
 
 
-Browser handling
+Browser environment properties
 
         alert( CAIRS.Browser.name ); // Chrome
         alert( CAIRS.Browser.onLine ); // is the browser online?
@@ -14,7 +14,33 @@ Browser handling
         alert( CAIRS.Browser.version ); // browser version
         alert( CAIRS.Browser.OS ); // Operational system
         alert( CAIRS.Browser.plugins ); // [], a list of available browser's plugins
+
+Check if plugin is installed
+
+        CAIRS.Browser.isPlugin( "Chrome PDF Viewer" ); // true/false
         
+Some plugin names
+
+        Shockwave Flash
+        Chrome Remote Desktop Viewer
+        Native Client
+        Chrome PDF Viewer
+        Adobe Acrobat 
+        Winamp Application Detector
+        Google Earth Plugin
+        Google Update
+        Java(TM) Platform SE 6 U38
+        Facebook Video Calling Plugin
+        Shockwave Flash
+        Java Deployment Toolkit 6.0.380.5
+        Unknow plugin
+
+
+Check if browser have the minimun requirement for running RIA apps
+
+        CAIRS.checkBrowserStuff();
+        
+        //=== Note, this method is automatically called when you call CAIRS.init();
 
 Code Injection
 
@@ -65,35 +91,8 @@ XML Serialization
         <item id="selecionartodos" text="select all" img="select_all.gif" imgdis="select_all.gif"/>
         <item id="file_sep_2" type="separator"/>
         <item id="excluir" text="delete selected" img="excluir.png" imgdis="excluir.png"/></menu>'
-
-
-Check if plugin is installed
-
-        CAIRS.Browser.isPlugin( "Chrome PDF Viewer" ); // true/false
         
-Some plugin names
 
-        Shockwave Flash
-        Chrome Remote Desktop Viewer
-        Native Client
-        Chrome PDF Viewer
-        Adobe Acrobat 
-        Winamp Application Detector
-        Google Earth Plugin
-        Google Update
-        Java(TM) Platform SE 6 U38
-        Facebook Video Calling Plugin
-        Shockwave Flash
-        Java Deployment Toolkit 6.0.380.5
-        Unknow plugin
-
-
-Check if browser have the minimun requirement for running RIA apps
-
-        CAIRS.checkBrowserStuff();
-        
-        //=== Note, this method is automatically called when you call CAIRS.init();
-        
 Check if variable is an Array
 
         var test = [];
