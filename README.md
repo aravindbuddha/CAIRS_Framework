@@ -12,22 +12,29 @@ CAIRS Framework
         alert( CAIRS.Browser.OS ); // Operational system
         alert( CAIRS.Browser.plugins ); // [], a list of available browser's plugins
         
-        /**
-                @function loadScript -  load script - code injection - on demand JavaScript loading files
-                @param {string}    url - the url of a given JavaScript file which will be loaded
-                @param {function}    callback -     function  callback which will be executed after the JavaScript file 100% loaded
-        */
-        CAIRS.loadScript("controller/FlexPaperComponent", function() // injects controller/FlexPaperComponent.js
+
+Code Injection
+
+        // injects controller/FlexPaperComponent.js
+        CAIRS.loadScript("controller/FlexPaperComponent", function() 
         {
                     // after code injected, call the component FlexPaperComponent           
                     FlexPaperComponent.callFlexPaper(
                     {
-                        //uid : file.name // mandatory
-                        icons_path : 'icons/32px/' // mandatory
-                        ,application_url : self.configuration[ uid ].application_url // mandatory
-                        ,application_path : self.configuration[ uid ].application_path // mandatory
-                        ,pdf_name : file.name // mandatory
-                        ,split_mode : splitMode // not mandatory
-                        ,magnification : self.configuration[ uid ].magnification  // not mandatory, default 1.1
+                        
                     });   
         });
+
+
+Convert JSON to XML
+
+        CAIRS.xml.fromJSON( { menu: [
+                { item : { id: "recarregagrid", text : "reload", img : "atualizar.png", imgdis : "atualizar.png"}, child : [
+			{ item : { id: "file_sep_0", text : "select all", img : "select_all.gif", imgdis : "select_all.gif"} }
+		] }
+		,{ item : { id: "file_sep_1", type : "separator"} }
+		,{ item : { id: "selecionartodos", text : "select all", img : "select_all.gif", imgdis : "select_all.gif"} }
+		,{ item : { id: "file_sep_2", type : "separator"} }
+		,{ item : { id: "excluir", text : "delete selected", img : "excluir.png", imgdis : "excluir.png"} }
+		
+	] } )
