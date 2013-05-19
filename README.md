@@ -40,7 +40,7 @@ Convert JSON to XML
         
         CAIRS.xml.fromJSON( json_menu );
         
-        XXXXX====   RESULT  ==== XXXXX
+        XXXXX====   RESULT -> XML DOCUMENT  ==== XXXXX
         
         <menu>
                 <item id="recarregagrid" text="reload" img="atualizar.png" imgdis="atualizar.png">
@@ -56,3 +56,12 @@ Convert JSON to XML
 XML Serialization
 
         CAIRS.xml.serialize( CAIRS.xml.fromJSON( json_menu ) );
+        
+        XXXXX====   RESULT -> XML STRING  ==== XXXXX
+        
+        '<menu><item id="recarregagrid" text="reload" img="atualizar.png" imgdis="atualizar.png">
+        <item id="file_sep_0" text="select all" img="select_all.gif" imgdis="select_all.gif"/></item>
+        <item id="file_sep_1" type="separator"/>
+        <item id="selecionartodos" text="select all" img="select_all.gif" imgdis="select_all.gif"/>
+        <item id="file_sep_2" type="separator"/>
+        <item id="excluir" text="delete selected" img="excluir.png" imgdis="excluir.png"/></menu>'
