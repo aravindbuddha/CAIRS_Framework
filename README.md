@@ -129,8 +129,12 @@ Some plugin names
 ==# Class creation
 
 	//  CAIRS.ext( parentClass, Class, nameSpace);
+	
+	/* Class name */
 	var myClassName = CAIRS.ext( null, {
-		myClassName : {
+		myClassName : {  /* Class name again */
+		
+			/* your methods and properties here */
 			
 			method : function(){
 				console.log("method ok");
