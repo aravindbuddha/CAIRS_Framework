@@ -113,6 +113,27 @@ Some plugin names
 ==# Convert Javascript number to currency format
 
 	console.log( CAIRS.toCurrency(10000000) ); // 10,000,000.00
+
+
+==# Convert currency string to a Javascript Float number
+	
+	/**
+		@function parseFloat - Convert currency string to a Javascript Float number
+		
+		@parameter currency - string or number for converting to javascript float type
+			mandatory
+		
+		@parameter places - places after decimal, default: 2
+			not mandatory
+		
+		@scope CAIRS.parseFloat(currency, places);
+	*/
+	
+	console.log( CAIRS.parseFloat("10,000,000.00") ); // 10000.00
+	
+	console.log( CAIRS.parseFloat("10,000,000.00") ); // 10000.00
+	
+	console.log( CAIRS.parseFloat("10,000,000.00", 1) ); // 10000.0
         
 ==# Implemented forEach statement
 
