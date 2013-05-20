@@ -188,3 +188,20 @@ Inheriting Object and Appending to a NameSpace
 		person.characteristics.head.speak();
 	console.log("-testing inherited method from Parent Class> ");
 		person.characteristics.head.test();
+		
+		
+	/*
+	------ Inheriting Object and Appending to a NameSpace 1 -------
+	-given namespace>
+	person.characteristics
+	-Total namespace levels>
+	3
+	-testing property from second level's namespace>
+	My >2< eyes are closed
+	-testing property from top level's namespace(new object appended)>
+	my eye's color is: >blue<
+	-testing method from top level's namespace(new object appended)>
+	>I'm speaking<
+	-testing inherited method from Parent Class>
+	parent ok 
+	*/
