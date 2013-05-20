@@ -22,7 +22,8 @@ CAIRS Framework
 * Inheriting Object and Appending to a pre created NameSpace
 	* testing
 	* result
-*  Creating Keyboard Shortcuts
+* Creating Keyboard Shortcuts
+
 ===============
 
 ## Init Framework
