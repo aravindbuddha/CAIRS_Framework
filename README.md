@@ -154,3 +154,37 @@ Implemented Object Inheriterance
         child ok
         -------------------------- end test ---------------------------
         */
+        
+	
+Inheriting Object and Appending to a NameSpace
+
+	var person = person || {};
+	
+	person.characteristics = person.characteristics || { 
+		eyes_number : 2
+		,nose_number : 1
+		,arms_number : 2
+	};
+	
+	var head = CAIRS.ext(CAIRS, {
+		head : {
+			speak : function(){
+				console.log(">I'm speaking<");
+			}
+			,eyes_color : "blue"	
+		}
+	}, "person.characteristics");
+	
+	console.log("------ Inheriting Object and Appending to a NameSpace 1 -------");
+	console.log("-given namespace> ");
+	console.log("person.characteristics");
+	console.log("-Total namespace levels> ");
+	console.log("3");
+	console.log("-testing property from second level's namespace> ");
+	console.log( "My >"+ person.characteristics.eyes_number +"< eyes are closed");
+	console.log("-testing property from top level's namespace(new object appended)> ");
+	console.log( "my eye's color is: >" + person.characteristics.head.eyes_color + "<" );
+	console.log("-testing method from top level's namespace(new object appended)> ");
+		person.characteristics.head.speak();
+	console.log("-testing inherited method from Parent Class> ");
+		person.characteristics.head.test();
