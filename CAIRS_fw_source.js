@@ -580,6 +580,24 @@ var CAIRS = {
 	  return !isNaN(parseFloat(n)) && isFinite(n);
 	}
 	
+	/**
+	
+		@function ext -  check if the current browser is able to run AJAX applications
+		
+		@parameter parentClass - An Object Literal Class which will be the inherited class, OR, null
+			if null, NO Parent Class will be inherited when creating your Class
+			mandatory
+		
+		@parameter objClass - An Object Literal notation of your Class
+			mandatory
+		
+		@parameter nameSpaceName - string value holding the namespace path where the created 
+			Class will be appended as top level, OR false, OR undefined
+			not mandory - default: The created object will be appended on the top level of window object
+		
+		@return object
+	
+	*/
 	,ext : function(parentClass, objClass, nameSpaceName)
 	{
 		var self = this, ob;
@@ -599,40 +617,23 @@ var CAIRS = {
 						window[level] = window[level] || {};
 						
 						//console.log(window[level]);
-						
-						//window[level][className] = Object.create( parentClass );
 						//ob = window[level][className];
-						
-						
 						last_level = window[level];
 						first_level = false;
-						
-						/*for( var item in objClass[className] )
-						{
-							//console.log(window[level][className].item)
-							window[level][className].item = objClass[className][item];
-							ob[item] = objClass[className][item];
-						}*/
-						
+
 					}
 					else
 					{
 						//console.log(last_level);
-						
 						last_level[ level ] =  last_level[ level ] || {};
-						
 						//console.log(last_level[ level ]);
-						
 						last_level = last_level[ level ];
 					}
 				});
-				
-				//console.log(last_level);
-				
 				//console.log(last_level);
 				//console.log(className);
 				
-				last_level[className] = Object.create( parentClass );
+				( (parentClass) && parentClass != null) ? last_level[className] = Object.create( parentClass ) : last_level[className] = {};
 				
 				ob = last_level[className];
 				for( var item in objClass[className] )
@@ -645,15 +646,15 @@ var CAIRS = {
 					
 					ob[item] = last_level[className][item];
 				}
-				
 				//console.log(className);
 				//console.log( root.NameSpace.usingNameSpace );
-				
-				
 			}
 			else
 			{
-				window[className] = Object.create( parentClass );
+				
+				( (parentClass) && parentClass != null) ? window[className] = Object.create( parentClass ) : window[className] = {};
+				
+				
 				ob = window[className];
 				for( var item in objClass[className] )
 				{
