@@ -26,7 +26,7 @@
 
 ===============
 
-## Init Framework <a href="#cairs-framework">top</a>
+## Init Framework                <a href="#cairs-framework">top</a>
 
 	window.onload = function (e)
 	{
@@ -34,7 +34,7 @@
 	}
 
 
-## Browser environment properties
+## Browser environment properties                <a href="#cairs-framework">top</a>
 
         alert( CAIRS.Browser.name ); // Chrome
         alert( CAIRS.Browser.onLine ); // is the browser online?
@@ -43,7 +43,7 @@
         alert( CAIRS.Browser.OS ); // Operational system
         alert( CAIRS.Browser.plugins ); // [], a list of available browser's plugins
 
-## Check if plugin is installed
+## Check if plugin is installed                <a href="#cairs-framework">top</a>
 
         CAIRS.Browser.isPlugin( "Chrome PDF Viewer" ); // true/false
         
@@ -64,13 +64,13 @@ Some plugin names
         Unknow plugin
 
 
-## Check if browser have the minimun requirement for running RIA apps
+## Check if browser have the minimun requirement for running RIA apps                <a href="#cairs-framework">top</a>
 
         CAIRS.checkBrowserStuff();
         
         //=== Note, this method is automatically called when you call CAIRS.init();
 
-## Code Injection
+## Code Injection                <a href="#cairs-framework">top</a>
 
         // injects controller/FlexPaperComponent.js
         CAIRS.loadScript("controller/FlexPaperComponent", function()
@@ -80,7 +80,7 @@ Some plugin names
         });
 
 
-## Convert JSON to XML
+## Convert JSON to XML                <a href="#cairs-framework">top</a>
 
         var json_menu = { menu: [
                 { item : { id: "recarregagrid", text : "reload", img : "atualizar.png", imgdis : "atualizar.png"}, child : [
@@ -107,7 +107,7 @@ Some plugin names
         </menu>
         
 
-## XML Serialization
+## XML Serialization                <a href="#cairs-framework">top</a>
 
         CAIRS.xml.serialize( CAIRS.xml.fromJSON( json_menu ) );
         
@@ -121,29 +121,29 @@ Some plugin names
         <item id="excluir" text="delete selected" img="excluir.png" imgdis="excluir.png"/></menu>'
         
 
-## Check if variable is an Array
+## Check if variable is an Array                <a href="#cairs-framework">top</a>
 
         var test = [];
         CAIRS.isArray( test ); // true
         
 
-## Check if variable is an Object literal
+## Check if variable is an Object literal                <a href="#cairs-framework">top</a>
 
         var test = {};
         CAIRS.isObject( test ); // true
         
         
-## Check if variable is a Number
+## Check if variable is a Number                <a href="#cairs-framework">top</a>
 
         var test = 2;
         CAIRS.isNumber( test ); // true
 
-## Convert Javascript number to currency format
+## Convert Javascript number to currency format                <a href="#cairs-framework">top</a>
 
 	console.log( CAIRS.toCurrency(10000000) ); // 10,000,000.00
 
 
-## Convert currency string to a Javascript Float number
+## Convert currency string to a Javascript Float number                <a href="#cairs-framework">top</a>
 	
 	/**
 		@function parseFloat - Convert currency string to a Javascript Float number
@@ -163,7 +163,7 @@ Some plugin names
 	
 	console.log( CAIRS.parseFloat("10,000,000.00", 1) ); // 10000.0
         
-## Implemented forEach statement
+## Implemented forEach statement                <a href="#cairs-framework">top</a>
 
         var myArray = [1, 2, 3, 4, "James"];
         myArray.forEach( function(element, array_index, array_object)
@@ -178,7 +178,7 @@ Some plugin names
 
 
 
-## Class creation
+## Class creation                <a href="#cairs-framework">top</a>
 	
 	
 	/**
@@ -229,7 +229,7 @@ Result
 
 
 
-## Implemented Object Inheritance
+## Implemented Object Inheritance                <a href="#cairs-framework">top</a>
 
         //  CAIRS.ext( parentClass, Class, nameSpace);
         
@@ -267,7 +267,7 @@ Result
         -------------------------- end test ---------------------------
         
 
-## Inheriting Object and Appending to a pre created NameSpace
+## Inheriting Object and Appending to a pre created NameSpace                <a href="#cairs-framework">top</a>
 	
 	/* 
 		Create namespace person - it will be appended on the window object
@@ -331,7 +331,7 @@ Result
 	parent ok
 
 
-## Creating Keyboard Shortcuts
+## Creating Keyboard Shortcuts                <a href="#cairs-framework">top</a>
 
 	CAIRS.createShortcut("Ctrl+F11", function()
 	{
