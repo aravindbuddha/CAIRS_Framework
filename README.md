@@ -177,7 +177,7 @@ Result
 
 
 
-==# Implemented Object Inheriterance
+==# Implemented Object Inheritance
 
         //  CAIRS.ext( parentClass, Class, nameSpace);
         
