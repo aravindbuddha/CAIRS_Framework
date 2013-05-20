@@ -178,6 +178,7 @@ Result
 	}, "person.characteristics");
 	
 Testing
+
 	console.log("------ Inheriting Object and Appending to a NameSpace 1 -------");
 	console.log("-given namespace>");
 	console.log("person.characteristics");
