@@ -1,28 +1,28 @@
 CAIRS Framework
 
-* <a href=\"#Init Framework\">Init Framework</a>
-* <a href=\"#Browser environment properties\">Browser environment properties</a>
-* <a href=\"#Check if plugin is installed\">Check if plugin is installed</a>
+* <a href="#Init Framework">Init Framework</a>
+* <a href="#Browser environment properties">Browser environment properties</a>
+* <a href="#Check if plugin is installed">Check if plugin is installed</a>
 	* Some plugin names
-* <a href=\"#Check if browser have the minimun requirement for running RIA apps\">Check if browser have the minimun requirement for running RIA apps</a>
-* <a href=\"#Code Injection\">Code Injection</a>
-* <a href=\"#Convert JSON to XML\">Convert JSON to XML</a>
-* <a href=\"#XML Serialization\">XML Serialization</a>
-* <a href=\"#Check if variable is an Array\">Check if variable is an Array</a>
-* <a href=\"#Check if variable is a Number\">Check if variable is a Number</a>
-* <a href=\"#Convert Javascript number to currency format\">Convert Javascript number to currency format</a>
-* <a href=\"#Convert currency string to a Javascript Float number\">Convert currency string to a Javascript Float number</a>
-* <a href=\"#Implemented forEach statement on top level window object\">Implemented forEach statement on top level window object</a>
-* <a href=\"#Class creation\">Class creation</a>
+* <a href="#Check if browser have the minimun requirement for running RIA apps">Check if browser have the minimun requirement for running RIA apps</a>
+* <a href="#Code Injection">Code Injection</a>
+* <a href="#Convert JSON to XML">Convert JSON to XML</a>
+* <a href="#XML Serialization">XML Serialization</a>
+* <a href="#Check if variable is an Array">Check if variable is an Array</a>
+* <a href="#Check if variable is a Number">Check if variable is a Number</a>
+* <a href="#Convert Javascript number to currency format">Convert Javascript number to currency format</a>
+* <a href="#Convert currency string to a Javascript Float number">Convert currency string to a Javascript Float number</a>
+* <a href="#Implemented forEach statement on top level window object">Implemented forEach statement on top level window object</a>
+* <a href="#Class creation">Class creation</a>
 	* testing
 	* result
-* <a href=\"#Implemented Object Inheritance\">Implemented Object Inheritance</a>
+* <a href="#Implemented Object Inheritance">Implemented Object Inheritance</a>
 	* testing
 	* result
-* <a href=\"#Inheriting Object and Appending to a pre created NameSpace\">Inheriting Object and Appending to a pre created NameSpace</a>
+* <a href="#Inheriting Object and Appending to a pre created NameSpace">Inheriting Object and Appending to a pre created NameSpace</a>
 	* testing
 	* result
-* <a href=\"#Creating Keyboard Shortcuts\">Creating Keyboard Shortcuts</a>
+* <a href="#Creating Keyboard Shortcuts">Creating Keyboard Shortcuts</a>
 
 ===============
 
