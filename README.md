@@ -301,3 +301,18 @@ Result
 	>I'm speaking<
 	-testing inherited method from Parent Class>
 	parent ok
+
+
+==# Creating Keyboard Shortcuts
+
+	CAIRS.createShortcut("Ctrl+F11", function()
+	{
+		/* example: open the help window now */
+		alert("Ctrl+F11 on keyboard");
+	});
+				
+	CAIRS.createShortcut("Ctrl+Shift+A", function()
+	{
+		/* example: Sellect all elements of a grid now */
+		alert("Ctrl+Shift+A on keyboard");
+	});
