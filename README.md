@@ -131,7 +131,7 @@ Some plugin names
 	
 	console.log( CAIRS.parseFloat("10,000,000.00") ); // 10000.00
 	
-	console.log( CAIRS.parseFloat("10,000,000.00") ); // 10000.00
+	console.log( CAIRS.parseFloat("10,000,000.00", 3) ); // 10000.000
 	
 	console.log( CAIRS.parseFloat("10,000,000.00", 1) ); // 10000.0
         
