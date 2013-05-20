@@ -19,7 +19,7 @@
 * <a href="#implemented-object-inheritance">Implemented-Object-Inheritance</a>
 	* testing
 	* result
-* <a href="#inheriting-object-and-appending-to-a-pre-created-nameSpace">Inheriting-Object-and-Appending-to-a-pre-created-NameSpace</a>
+* <a href="#inheriting-object-and-appending-to-a-pre-created-namespace">Inheriting-Object-and-Appending-to-a-pre-created-NameSpace</a>
 	* testing
 	* result
 * <a href="#creating-keyboard-shortcuts">Creating-Keyboard-Shortcuts</a>
