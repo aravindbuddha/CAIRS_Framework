@@ -580,6 +580,92 @@ var CAIRS = {
 	  return !isNaN(parseFloat(n)) && isFinite(n);
 	}
 	
+	,ext : function(parentClass, objClass, nameSpaceName)
+	{
+		var self = this, ob;
+		
+		(typeof nameSpaceName === 'undefined') ? nameSpaceName = false : "";
+		
+		for( var className in objClass )
+		{
+			if(nameSpaceName)
+			{
+				var first_level = true;
+				var last_level = '';
+				nameSpaceName.split(".").forEach( function(level, index, array)
+				{
+					if(first_level)
+					{
+						window[level] = window[level] || {};
+						
+						//console.log(window[level]);
+						
+						//window[level][className] = Object.create( parentClass );
+						//ob = window[level][className];
+						
+						
+						last_level = window[level];
+						first_level = false;
+						
+						/*for( var item in objClass[className] )
+						{
+							//console.log(window[level][className].item)
+							window[level][className].item = objClass[className][item];
+							ob[item] = objClass[className][item];
+						}*/
+						
+					}
+					else
+					{
+						//console.log(last_level);
+						
+						last_level[ level ] =  last_level[ level ] || {};
+						
+						//console.log(last_level[ level ]);
+						
+						last_level = last_level[ level ];
+					}
+				});
+				
+				//console.log(last_level);
+				
+				//console.log(last_level);
+				//console.log(className);
+				
+				last_level[className] = Object.create( parentClass );
+				
+				ob = last_level[className];
+				for( var item in objClass[className] )
+				{
+					last_level[className][item] = last_level[item] || {}
+					
+					last_level[className][item] = objClass[className][item];
+					
+					
+					
+					ob[item] = last_level[className][item];
+				}
+				
+				//console.log(className);
+				//console.log( root.NameSpace.usingNameSpace );
+				
+				
+			}
+			else
+			{
+				window[className] = Object.create( parentClass );
+				ob = window[className];
+				for( var item in objClass[className] )
+				{
+					ob[item] = objClass[className][item];
+				}
+			}
+			
+		}
+		
+		return ob;	
+	}
+	
 	/**
 		@object xml - provides xml manipulation
 	*/
@@ -601,9 +687,7 @@ var CAIRS = {
 		fromJSON : function( json, isRoot, parentNode, xmlDoc )
 		{
 			/** 
-				@mandatory parameters:
-					@json = json object
-			 		@isRoot = true/false
+				@parameter json - mandatory JSON:
 			*/
 			
 			var self = CAIRS;
@@ -657,7 +741,7 @@ var CAIRS = {
 									if( self.isObject( attributes ) )
 									{
 										for ( var attribute in attributes )
-											{
+										{
 											node.setAttribute( attribute, attributes[attribute] );		
 										}
 									}
@@ -686,7 +770,10 @@ var CAIRS = {
 		
 	}	
 	
-	
+	,test : function()
+	{
+		console.log("parent ok");	
+	}
 	
 	/**
 		@function init -  performs all the necessary tasks before let the user to use the CAIRS object
