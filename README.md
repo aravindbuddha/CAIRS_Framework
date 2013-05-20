@@ -1,7 +1,31 @@
 CAIRS Framework
+
+* Init Framework
+* Browser environment properties
+* Check if plugin is installed
+	* Some plugin names
+* Check if browser have the minimun requirement for running RIA apps
+* Code Injection
+* Convert JSON to XML
+* XML Serialization
+* Check if variable is an Array
+* Check if variable is a Number
+* Convert Javascript number to currency format
+* Convert currency string to a Javascript Float number
+* Implemented forEach statement on top level window object
+* Class creation
+	* testing
+	* result
+* Implemented Object Inheritance
+	* testing
+	* result
+* Inheriting Object and Appending to a pre created NameSpace
+	* testing
+	* result
+*  Creating Keyboard Shortcuts
 ===============
 
-==# Init Framework
+## Init Framework
 
 	window.onload = function (e)
 	{
@@ -9,7 +33,7 @@ CAIRS Framework
 	}
 
 
-==# Browser environment properties
+## Browser environment properties
 
         alert( CAIRS.Browser.name ); // Chrome
         alert( CAIRS.Browser.onLine ); // is the browser online?
@@ -18,7 +42,7 @@ CAIRS Framework
         alert( CAIRS.Browser.OS ); // Operational system
         alert( CAIRS.Browser.plugins ); // [], a list of available browser's plugins
 
-==# Check if plugin is installed
+## Check if plugin is installed
 
         CAIRS.Browser.isPlugin( "Chrome PDF Viewer" ); // true/false
         
@@ -39,13 +63,13 @@ Some plugin names
         Unknow plugin
 
 
-==# Check if browser have the minimun requirement for running RIA apps
+## Check if browser have the minimun requirement for running RIA apps
 
         CAIRS.checkBrowserStuff();
         
         //=== Note, this method is automatically called when you call CAIRS.init();
 
-==# Code Injection
+## Code Injection
 
         // injects controller/FlexPaperComponent.js
         CAIRS.loadScript("controller/FlexPaperComponent", function()
@@ -55,7 +79,7 @@ Some plugin names
         });
 
 
-==# Convert JSON to XML
+## Convert JSON to XML
 
         var json_menu = { menu: [
                 { item : { id: "recarregagrid", text : "reload", img : "atualizar.png", imgdis : "atualizar.png"}, child : [
@@ -82,7 +106,7 @@ Some plugin names
         </menu>
         
 
-==# XML Serialization
+## XML Serialization
 
         CAIRS.xml.serialize( CAIRS.xml.fromJSON( json_menu ) );
         
@@ -96,29 +120,29 @@ Some plugin names
         <item id="excluir" text="delete selected" img="excluir.png" imgdis="excluir.png"/></menu>'
         
 
-==# Check if variable is an Array
+## Check if variable is an Array
 
         var test = [];
         CAIRS.isArray( test ); // true
         
 
-==# Check if variable is an Object literal
+## Check if variable is an Object literal
 
         var test = {};
         CAIRS.isObject( test ); // true
         
         
-==# Check if variable is a Number
+## Check if variable is a Number
 
         var test = 2;
         CAIRS.isNumber( test ); // true
 
-==# Convert Javascript number to currency format
+## Convert Javascript number to currency format
 
 	console.log( CAIRS.toCurrency(10000000) ); // 10,000,000.00
 
 
-==# Convert currency string to a Javascript Float number
+## Convert currency string to a Javascript Float number
 	
 	/**
 		@function parseFloat - Convert currency string to a Javascript Float number
@@ -138,7 +162,7 @@ Some plugin names
 	
 	console.log( CAIRS.parseFloat("10,000,000.00", 1) ); // 10000.0
         
-==# Implemented forEach statement
+## Implemented forEach statement
 
         var myArray = [1, 2, 3, 4, "James"];
         myArray.forEach( function(element, array_index, array_object)
@@ -153,7 +177,7 @@ Some plugin names
 
 
 
-==# Class creation
+## Class creation
 	
 	
 	/**
@@ -204,7 +228,7 @@ Result
 
 
 
-==# Implemented Object Inheritance
+## Implemented Object Inheritance
 
         //  CAIRS.ext( parentClass, Class, nameSpace);
         
@@ -242,7 +266,7 @@ Result
         -------------------------- end test ---------------------------
         
 
-==# Inheriting Object and Appending to a pre created NameSpace
+## Inheriting Object and Appending to a pre created NameSpace
 	
 	/* 
 		Create namespace person - it will be appended on the window object
@@ -306,7 +330,7 @@ Result
 	parent ok
 
 
-==# Creating Keyboard Shortcuts
+## Creating Keyboard Shortcuts
 
 	CAIRS.createShortcut("Ctrl+F11", function()
 	{
