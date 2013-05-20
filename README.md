@@ -134,6 +134,7 @@ Some plugin names
 		@function ext -  check if the current browser is able to run AJAX applications
 		
 		@parameter parentClass - An Object Literal Class which will be the inherited class, OR, null
+			if null, NO Parent Class will be inherited when creating your Class
 			mandatory
 		
 		@parameter objClass - An Object Literal notation of your Class
