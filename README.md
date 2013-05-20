@@ -1,6 +1,6 @@
 CAIRS Framework
 
-* #Init Framework
+# Init Framework
 * Browser environment properties
 * Check if plugin is installed
 	* Some plugin names
