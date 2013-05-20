@@ -1,28 +1,28 @@
 CAIRS Framework
 
-# Init Framework
-* Browser environment properties
-* Check if plugin is installed
+* <a href=\"#Init Framework\">Init Framework</a>
+* <a href=\"#Browser environment properties\">Browser environment properties</a>
+* <a href=\"#Check if plugin is installed\">Check if plugin is installed</a>
 	* Some plugin names
-* Check if browser have the minimun requirement for running RIA apps
-* Code Injection
-* Convert JSON to XML
-* XML Serialization
-* Check if variable is an Array
-* Check if variable is a Number
-* Convert Javascript number to currency format
-* Convert currency string to a Javascript Float number
-* Implemented forEach statement on top level window object
-* Class creation
+* <a href=\"#Check if browser have the minimun requirement for running RIA apps\">Check if browser have the minimun requirement for running RIA apps</a>
+* <a href=\"#Code Injection\">Code Injection</a>
+* <a href=\"#Convert JSON to XML\">Convert JSON to XML</a>
+* <a href=\"#XML Serialization\">XML Serialization</a>
+* <a href=\"#Check if variable is an Array\">Check if variable is an Array</a>
+* <a href=\"#Check if variable is a Number\">Check if variable is a Number</a>
+* <a href=\"#Convert Javascript number to currency format\">Convert Javascript number to currency format</a>
+* <a href=\"#Convert currency string to a Javascript Float number\">Convert currency string to a Javascript Float number</a>
+* <a href=\"#Implemented forEach statement on top level window object\">Implemented forEach statement on top level window object</a>
+* <a href=\"#Class creation\">Class creation</a>
 	* testing
 	* result
-* Implemented Object Inheritance
+* <a href=\"#Implemented Object Inheritance\">Implemented Object Inheritance</a>
 	* testing
 	* result
-* Inheriting Object and Appending to a pre created NameSpace
+* <a href=\"#Inheriting Object and Appending to a pre created NameSpace\">Inheriting Object and Appending to a pre created NameSpace</a>
 	* testing
 	* result
-* Creating Keyboard Shortcuts
+* <a href=\"#Creating Keyboard Shortcuts\">Creating Keyboard Shortcuts</a>
 
 ===============
 
