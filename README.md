@@ -2,8 +2,10 @@ CAIRS Framework
 ===============
 
 ==# Init Framework
-
-        CAIRS.init();
+	window.onload = function (e)
+	{
+        	CAIRS.init();
+        }
 
 
 ==# Browser environment properties
