@@ -181,6 +181,7 @@ Result
 
         //  CAIRS.ext( parentClass, Class, nameSpace);
         
+        /* Create the class myClassName inheriting the CAIRS Framework's class  */
         var myClassName = CAIRS.ext( CAIRS, {
                 myClassName : {
                         method : function(){
@@ -211,15 +212,27 @@ Result
         
 
 ==# Inheriting Object and Appending to a NameSpace
-
+	
+	/* 
+		Create namespace person - it will be appended on the window object
+	*/
 	var person = person || {};
 	
+	
+	/* 
+		append a new level  characteristics to the 'person' top level namespace
+	*/
 	person.characteristics = person.characteristics || { 
 		eyes_number : 2
 		,nose_number : 1
 		,arms_number : 2
 	};
 	
+	
+	/* 
+		Create the class head inheriting the CAIRS Framework's class AND 
+		append it to the top level given 'person.characteristics' namespace  
+	*/
 	var head = CAIRS.ext(CAIRS, {
 		head : {
 			speak : function(){
