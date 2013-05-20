@@ -5,13 +5,13 @@
 * <a href="#check-if-plugin-is-installed">Check-if-plugin-is-installed</a>
 	* Some-plugin-names
 * <a href="#check-if-browser-have-the-minimun-requirement-for-running-ria-apps">Check-if-browser-have-the-minimun-requirement-for-running-RIA-apps</a>
-* <a href="#code-Injection">Code-Injection</a>
+* <a href="#code-injection">Code-Injection</a>
 * <a href="#convert-json-to-xml">Convert-JSON-to-XML</a>
 * <a href="#xml-serialization">XML-Serialization</a>
 * <a href="#check-if-variable-is-an-array">Check-if-variable-is-an-Array</a>
 * <a href="#check-if-variable-is-a-number">Check-if-variable-is-a-Number</a>
 * <a href="#convert-javascript-number-to-currency-format">Convert-Javascript-number-to-currency-format</a>
-* <a href="#convert-currency-string-to-a-Javascript-float-number">Convert-currency-string-to-a-Javascript-Float-number</a>
+* <a href="#convert-currency-string-to-a-javascript-float-number">Convert-currency-string-to-a-Javascript-Float-number</a>
 * <a href="#implemented-foreach-statement-on-top-level-window-object">Implemented-forEach-statement-on-top-level-window-object</a>
 * <a href="#class-creation">Class-creation</a>
 	* testing
@@ -26,7 +26,8 @@
 
 ===============
 
-## Init Framework                <a href="#cairs-framework">top</a>
+## Init Framework
+<a href="#cairs-framework">page top</a>
 
 	window.onload = function (e)
 	{
@@ -34,7 +35,8 @@
 	}
 
 
-## Browser environment properties                <a href="#cairs-framework">top</a>
+## Browser environment properties
+<a href="#cairs-framework">page top</a>
 
         alert( CAIRS.Browser.name ); // Chrome
         alert( CAIRS.Browser.onLine ); // is the browser online?
@@ -43,7 +45,8 @@
         alert( CAIRS.Browser.OS ); // Operational system
         alert( CAIRS.Browser.plugins ); // [], a list of available browser's plugins
 
-## Check if plugin is installed                <a href="#cairs-framework">top</a>
+## Check if plugin is installed
+<a href="#cairs-framework">page top</a>
 
         CAIRS.Browser.isPlugin( "Chrome PDF Viewer" ); // true/false
         
@@ -64,13 +67,15 @@ Some plugin names
         Unknow plugin
 
 
-## Check if browser have the minimun requirement for running RIA apps                <a href="#cairs-framework">top</a>
+## Check if browser have the minimun requirement for running RIA apps
+<a href="#cairs-framework">page top</a>
 
         CAIRS.checkBrowserStuff();
         
         //=== Note, this method is automatically called when you call CAIRS.init();
 
-## Code Injection                <a href="#cairs-framework">top</a>
+## Code Injection
+<a href="#cairs-framework">page top</a>
 
         // injects controller/FlexPaperComponent.js
         CAIRS.loadScript("controller/FlexPaperComponent", function()
@@ -80,7 +85,8 @@ Some plugin names
         });
 
 
-## Convert JSON to XML                <a href="#cairs-framework">top</a>
+## Convert JSON to XML
+<a href="#cairs-framework">page top</a>
 
         var json_menu = { menu: [
                 { item : { id: "recarregagrid", text : "reload", img : "atualizar.png", imgdis : "atualizar.png"}, child : [
@@ -107,7 +113,8 @@ Some plugin names
         </menu>
         
 
-## XML Serialization                <a href="#cairs-framework">top</a>
+## XML Serialization
+<a href="#cairs-framework">page top</a>
 
         CAIRS.xml.serialize( CAIRS.xml.fromJSON( json_menu ) );
         
@@ -121,29 +128,34 @@ Some plugin names
         <item id="excluir" text="delete selected" img="excluir.png" imgdis="excluir.png"/></menu>'
         
 
-## Check if variable is an Array                <a href="#cairs-framework">top</a>
+## Check if variable is an Array
+<a href="#cairs-framework">page top</a>
 
         var test = [];
         CAIRS.isArray( test ); // true
         
 
-## Check if variable is an Object literal                <a href="#cairs-framework">top</a>
+## Check if variable is an Object literal
+<a href="#cairs-framework">page top</a>
 
         var test = {};
         CAIRS.isObject( test ); // true
         
         
-## Check if variable is a Number                <a href="#cairs-framework">top</a>
+## Check if variable is a Number
+<a href="#cairs-framework">page top</a>
 
         var test = 2;
         CAIRS.isNumber( test ); // true
 
-## Convert Javascript number to currency format                <a href="#cairs-framework">top</a>
+## Convert Javascript number to currency format
+<a href="#cairs-framework">page top</a>
 
 	console.log( CAIRS.toCurrency(10000000) ); // 10,000,000.00
 
 
-## Convert currency string to a Javascript Float number                <a href="#cairs-framework">top</a>
+## Convert currency string to a Javascript Float number
+<a href="#cairs-framework">page top</a>
 	
 	/**
 		@function parseFloat - Convert currency string to a Javascript Float number
@@ -163,7 +175,8 @@ Some plugin names
 	
 	console.log( CAIRS.parseFloat("10,000,000.00", 1) ); // 10000.0
         
-## Implemented forEach statement                <a href="#cairs-framework">top</a>
+## Implemented forEach statement
+<a href="#cairs-framework">page top</a>
 
         var myArray = [1, 2, 3, 4, "James"];
         myArray.forEach( function(element, array_index, array_object)
@@ -178,7 +191,8 @@ Some plugin names
 
 
 
-## Class creation                <a href="#cairs-framework">top</a>
+## Class creation
+<a href="#cairs-framework">page top</a>
 	
 	
 	/**
@@ -229,7 +243,8 @@ Result
 
 
 
-## Implemented Object Inheritance                <a href="#cairs-framework">top</a>
+## Implemented Object Inheritance
+<a href="#cairs-framework">page top</a>
 
         //  CAIRS.ext( parentClass, Class, nameSpace);
         
@@ -267,7 +282,8 @@ Result
         -------------------------- end test ---------------------------
         
 
-## Inheriting Object and Appending to a pre created NameSpace                <a href="#cairs-framework">top</a>
+## Inheriting Object and Appending to a pre created NameSpace
+<a href="#cairs-framework">page top</a>
 	
 	/* 
 		Create namespace person - it will be appended on the window object
@@ -331,7 +347,8 @@ Result
 	parent ok
 
 
-## Creating Keyboard Shortcuts                <a href="#cairs-framework">top</a>
+## Creating Keyboard Shortcuts
+<a href="#cairs-framework">page top</a>
 
 	CAIRS.createShortcut("Ctrl+F11", function()
 	{
