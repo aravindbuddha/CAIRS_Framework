@@ -181,7 +181,10 @@ Result
 
         //  CAIRS.ext( parentClass, Class, nameSpace);
         
-        /* Create the class myClassName inheriting the CAIRS Framework's class  */
+        
+        /** 
+        	Create the class myClassName inheriting the CAIRS Framework's class  
+        */
         var myClassName = CAIRS.ext( CAIRS, {
                 myClassName : {
                         method : function(){
@@ -190,6 +193,7 @@ Result
                         ,property : "string property"
                 }
         });
+        
 
 Testing
 
