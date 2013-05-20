@@ -191,9 +191,9 @@ Result
         });
 
 Testing
-	
+
 	console.log("-------------------- Inheriting Object's test -----------------");
-        console.log("-parent class's method testing> ");
+	console.log("-parent class's method testing> ");
         myClassName.test();
         console.log("-child class's method testing> ");
         myClassName.method();
