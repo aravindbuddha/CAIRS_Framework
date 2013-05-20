@@ -1,12 +1,12 @@
 CAIRS Framework
 ===============
 
-Init Framework
+==# Init Framework
 
         CAIRS.init();
 
 
-Browser environment properties
+==# Browser environment properties
 
         alert( CAIRS.Browser.name ); // Chrome
         alert( CAIRS.Browser.onLine ); // is the browser online?
@@ -15,7 +15,7 @@ Browser environment properties
         alert( CAIRS.Browser.OS ); // Operational system
         alert( CAIRS.Browser.plugins ); // [], a list of available browser's plugins
 
-Check if plugin is installed
+==# Check if plugin is installed
 
         CAIRS.Browser.isPlugin( "Chrome PDF Viewer" ); // true/false
         
@@ -36,13 +36,13 @@ Some plugin names
         Unknow plugin
 
 
-Check if browser have the minimun requirement for running RIA apps
+==# Check if browser have the minimun requirement for running RIA apps
 
         CAIRS.checkBrowserStuff();
         
         //=== Note, this method is automatically called when you call CAIRS.init();
 
-Code Injection
+==# Code Injection
 
         // injects controller/FlexPaperComponent.js
         CAIRS.loadScript("controller/FlexPaperComponent", function()
@@ -52,7 +52,7 @@ Code Injection
         });
 
 
-Convert JSON to XML
+==# Convert JSON to XML
 
         var json_menu = { menu: [
                 { item : { id: "recarregagrid", text : "reload", img : "atualizar.png", imgdis : "atualizar.png"}, child : [
@@ -79,7 +79,7 @@ Convert JSON to XML
         </menu>
         
 
-XML Serialization
+==# XML Serialization
 
         CAIRS.xml.serialize( CAIRS.xml.fromJSON( json_menu ) );
         
@@ -93,25 +93,25 @@ XML Serialization
         <item id="excluir" text="delete selected" img="excluir.png" imgdis="excluir.png"/></menu>'
         
 
-Check if variable is an Array
+==# Check if variable is an Array
 
         var test = [];
         CAIRS.isArray( test ); // true
         
 
-Check if variable is an Object literal
+==# Check if variable is an Object literal
 
         var test = {};
         CAIRS.isObject( test ); // true
         
         
-Check if variable is a Number
+==# Check if variable is a Number
 
         var test = 2;
         CAIRS.isNumber( test ); // true
         
         
-Implemented forEach statement
+==# Implemented forEach statement
 
         var myArray = [1, 2, 3, 4, "James"];
         myArray.forEach( function(element, array_index, array_object)
@@ -125,7 +125,7 @@ Implemented forEach statement
         });
         
         
-Implemented Object Inheriterance
+==# Implemented Object Inheriterance
 
         //  CAIRS.ext( parentClass, Class, nameSpace);
         
@@ -137,26 +137,28 @@ Implemented Object Inheriterance
                         ,property : "string property"
                 }
         });
-				
-        console.log("-------------------- Inheriting Object's test -----------------");
+
+Testing
+	
+	console.log("-------------------- Inheriting Object's test -----------------");
         console.log("-parent class's method testing> ");
         myClassName.test();
         console.log("-child class's method testing> ");
         myClassName.method();
         console.log("-------------------------- end test ---------------------------");
         console.log("---------------------------------------------------------------");
-        
-        /*
+
+Result
+
         -------------------- Inheriting Object's test -----------------
         -parent class's method testing>
         parent ok
         -child class's method testing>
         child ok
         -------------------------- end test ---------------------------
-        */
         
 
-Inheriting Object and Appending to a NameSpace
+==# Inheriting Object and Appending to a NameSpace
 
 	var person = person || {};
 	
@@ -175,10 +177,11 @@ Inheriting Object and Appending to a NameSpace
 		}
 	}, "person.characteristics");
 	
+Testing
 	console.log("------ Inheriting Object and Appending to a NameSpace 1 -------");
-	console.log("-given namespace> ");
+	console.log("-given namespace>");
 	console.log("person.characteristics");
-	console.log("-Total namespace levels> ");
+	console.log("-Total namespace levels>");
 	console.log("3");
 	console.log("-testing property from second level's namespace> ");
 	console.log( "My >"+ person.characteristics.eyes_number +"< eyes are closed");
@@ -188,9 +191,9 @@ Inheriting Object and Appending to a NameSpace
 		person.characteristics.head.speak();
 	console.log("-testing inherited method from Parent Class> ");
 		person.characteristics.head.test();
+
+Result
 		
-		
-	/*
 	------ Inheriting Object and Appending to a NameSpace 1 -------
 	-given namespace>
 	person.characteristics
@@ -203,5 +206,4 @@ Inheriting Object and Appending to a NameSpace
 	-testing method from top level's namespace(new object appended)>
 	>I'm speaking<
 	-testing inherited method from Parent Class>
-	parent ok 
-	*/
+	parent ok
