@@ -12,7 +12,7 @@
 * <a href="#check-if-variable-is-a-number">Check-if-variable-is-a-Number</a>
 * <a href="#convert-javascript-number-to-currency-format">Convert-Javascript-number-to-currency-format</a>
 * <a href="#convert-currency-string-to-a-javascript-float-number">Convert-currency-string-to-a-Javascript-Float-number</a>
-* <a href="#implemented-foreach-statement-on-top-level-window-object">Implemented-forEach-statement-on-top-level-window-object</a>
+* <a href="#implemented-foreach-statement">Implemented-forEach-statement-on-top-level-window-object</a>
 * <a href="#class-creation">Class-creation</a>
 	* testing
 	* result
