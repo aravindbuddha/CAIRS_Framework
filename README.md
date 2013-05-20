@@ -155,7 +155,7 @@ Implemented Object Inheriterance
         -------------------------- end test ---------------------------
         */
         
-	
+
 Inheriting Object and Appending to a NameSpace
 
 	var person = person || {};
