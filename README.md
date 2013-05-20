@@ -211,7 +211,7 @@ Result
         -------------------------- end test ---------------------------
         
 
-==# Inheriting Object and Appending to a NameSpace
+==# Inheriting Object and Appending to a pre created NameSpace
 	
 	/* 
 		Create namespace person - it will be appended on the window object
