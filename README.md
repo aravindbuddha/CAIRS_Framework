@@ -109,7 +109,10 @@ Some plugin names
 
         var test = 2;
         CAIRS.isNumber( test ); // true
-        
+
+==# Convert Javascript number to currency format
+
+	console.log( CAIRS.toCurrency(10000000) ); // 10,000,000.00
         
 ==# Implemented forEach statement
 
