@@ -131,11 +131,13 @@ Some plugin names
 	//  CAIRS.ext( parentClass, Class, nameSpace);
 	var myClassName = CAIRS.ext( null, {
 		myClassName : {
+			
 			method : function(){
 				console.log("method ok");
+			}
+			
+			,property : "string property"
 		}
-		,property : "string property"
-						}
 	});
 	
 Testing
