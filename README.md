@@ -123,8 +123,33 @@ Some plugin names
                 // 4
                 // James
         });
-        
-        
+
+
+
+==# Class creation
+
+	//  CAIRS.ext( parentClass, Class, nameSpace);
+	var myClassName = CAIRS.ext( null, {
+		myClassName : {
+			method : function(){
+				console.log("method ok");
+		}
+		,property : "string property"
+						}
+	});
+	
+Testing
+			
+	console.log("-acessing class's method> ");
+	myClassName.method();
+	
+Result
+
+	-acessing class's method>
+	method ok 
+
+
+
 ==# Implemented Object Inheriterance
 
         //  CAIRS.ext( parentClass, Class, nameSpace);
