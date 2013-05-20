@@ -147,10 +147,10 @@ Implemented Object Inheriterance
         console.log("---------------------------------------------------------------");
         
         /*
-        -------------------- Inheriting Object's test ----------------- mark.web2.eti.br:174
-        -parent class's method testing>  mark.web2.eti.br:175
-        parent ok CAIRS_fw.js:775
-        -child class's method testing>  mark.web2.eti.br:177
-        child ok mark.web2.eti.br:167
-        -------------------------- end test --------------------------- mark.web2.eti.br:179
+        -------------------- Inheriting Object's test -----------------
+        -parent class's method testing>
+        parent ok
+        -child class's method testing>
+        child ok
+        -------------------------- end test ---------------------------
         */
