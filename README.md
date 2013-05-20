@@ -127,8 +127,28 @@ Some plugin names
 
 
 ==# Class creation
-
+	
+	
+	/**
+	
+		@function ext -  check if the current browser is able to run AJAX applications
+		
+		@parameter parentClass - An Object Literal Class which will be the inherited class, OR, null
+			mandatory
+		
+		@parameter objClass - An Object Literal notation of your Class
+			mandatory
+		
+		@parameter nameSpaceName - string value holding the namespace path where the created 
+			Class will be appended as top level, OR false, OR undefined
+			not mandory - default: The created object will be appended on the top level of window object
+		
+		@return object
+	
+	*/
 	//  CAIRS.ext( parentClass, Class, nameSpace);
+	//  CAIRS.ext( null, {} ) EQUAL  CAIRS.ext( null, {}, false) ;
+
 	
 	/* Class name */
 	var myClassName = CAIRS.ext( null, {
@@ -142,7 +162,7 @@ Some plugin names
 			
 			,property : "string property"
 		}
-	});
+	}  );
 	
 Testing
 			
