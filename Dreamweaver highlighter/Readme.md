@@ -1,4 +1,4 @@
-## 1 - Save he xml file under
+## 1 - Save the xml file under
 
   c:\PATH FOR ADOBE INSTALLATION\Adobe Dreamweaver CS5\configuration\CodeColoring
   
