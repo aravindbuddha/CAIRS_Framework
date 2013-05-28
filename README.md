@@ -89,7 +89,7 @@ Acessing the cookie object
 	
 	CAIRS.cookie
 
-# Create cookie with a given value
+### Create cookie with a given value
 <a href="#cairs-framework">page top</a>
 
 	/**
@@ -103,7 +103,7 @@ Acessing the cookie object
 	var duration = 360; // in days
 	CAIRS.cookie.set( "cookie name", "cookie value", duration );
 
-# Create cookie with a given key
+### Create cookie with a given key
 <a href="#cairs-framework">page top</a>
 
 
@@ -121,7 +121,7 @@ Acessing the cookie object
 
 
 
-# Get cookie value with a given name
+### Get cookie value with a given name
 <a href="#cairs-framework">page top</a>
 
 
@@ -134,7 +134,7 @@ Acessing the cookie object
 	
 	CAIRS.cookie.get( "cookie name" );
 
-# Get key value from a cookie
+### Get key value from a cookie
 <a href="#cairs-framework">page top</a>
         
 	/**
