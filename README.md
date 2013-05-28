@@ -5,6 +5,11 @@
 * <a href="#check-if-plugin-is-installed">Check-if-plugin-is-installed</a>
 	* Some-plugin-names
 * <a href="#check-if-browser-have-the-minimun-requirement-for-running-ria-apps">Check-if-browser-have-the-minimun-requirement-for-running-RIA-apps</a>
+* <a href="#cookies-handling">Cookies-handling</a>
+	* <a href="#create-cookie-with-a-given-value">Create cookie with a given value</a>
+	* <a href="#create-cookie-with-a-given-key">Create cookie with a given key</a>
+	* <a href="#get-cookie-value-with-a-given-name">Get cookie value with a given name</a>
+	* <a href="#get-cookie-value-with-a-given-key">Get cookie value with a given key</a>
 * <a href="#code-injection">Code-Injection</a>
 * <a href="#convert-json-to-xml">Convert-JSON-to-XML</a>
 * <a href="#xml-serialization">XML-Serialization</a>
@@ -73,6 +78,22 @@ Some plugin names
         CAIRS.checkBrowserStuff();
         
         //=== Note, this method is automatically called when you call CAIRS.init();
+		
+		
+## Cookies handling
+<a href="#cairs-framework">page top</a>
+
+The CAIRS framework provides one object named "cookie" on the top level of the framework. With this object you can create and get cookies with/from a given value or a key.
+
+# Create cookie with a given value
+
+# Create cookie with a given key
+
+# Get cookie value with a given name
+
+# Get cookie value with a given key
+
+        
 
 ## Code Injection
 <a href="#cairs-framework">page top</a>
