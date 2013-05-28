@@ -9,7 +9,7 @@
 	* <a href="#create-cookie-with-a-given-value">Create cookie with a given value</a>
 	* <a href="#create-cookie-with-a-given-key">Create cookie with a given key</a>
 	* <a href="#get-cookie-value-with-a-given-name">Get cookie value with a given name</a>
-	* <a href="#get-cookie-value-with-a-given-key">Get cookie value with a given key</a>
+	* <a href="#get-key-value-from-a-cookie">Get key value from a cookie</a>
 * <a href="#code-injection">Code-Injection</a>
 * <a href="#convert-json-to-xml">Convert-JSON-to-XML</a>
 * <a href="#xml-serialization">XML-Serialization</a>
@@ -119,7 +119,7 @@ Acessing the cookie object
 	
 	CAIRS.cookie.get( "cookie name" );
 
-# Get cookie value with a given key
+# Get key value from a cookie
 <a href="#cairs-framework">page top</a>
         
 
