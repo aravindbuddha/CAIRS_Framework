@@ -86,13 +86,16 @@ Some plugin names
 The CAIRS framework provides one object named "cookie" on the top level of the framework. With this object you can create and get cookies with/from a given value or a key.
 
 # Create cookie with a given value
-  
-# Create cookie with a given key
-  
-# Get cookie value with a given name
-  
-# Get cookie value with a given key
+<a href="#cairs-framework">page top</a>
 
+# Create cookie with a given key
+<a href="#cairs-framework">page top</a>
+
+# Get cookie value with a given name
+<a href="#cairs-framework">page top</a>
+
+# Get cookie value with a given key
+<a href="#cairs-framework">page top</a>
         
 
 ## Code Injection
