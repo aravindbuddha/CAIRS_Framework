@@ -93,11 +93,12 @@ Acessing the cookie object
 <a href="#cairs-framework">page top</a>
 
 	/**
-	@parameters:
+		@parameters:
+			1 - cookie name -> string
+			2 - cookie value -> string
+			3 - duration (in days) -> integer or decimal
 		
-		1 - cookie name -> string
-		2 - cookie value -> string
-		3 - duration (in days) -> integer or decimal
+		@return - boolean -> true / false
 	*/
 	var duration = 360; // in days
 	CAIRS.cookie.set( "cookie name", "cookie value", duration );
@@ -107,6 +108,16 @@ Acessing the cookie object
 
 # Get cookie value with a given name
 <a href="#cairs-framework">page top</a>
+
+
+	/**
+		@parameters:
+			1 - cookie name -> string
+		
+		@return - string value OR false if cookie does not exist
+	*/
+	
+	CAIRS.cookie.get( "cookie name" );
 
 # Get cookie value with a given key
 <a href="#cairs-framework">page top</a>
