@@ -83,10 +83,24 @@ Some plugin names
 ## Cookies handling
 <a href="#cairs-framework">page top</a>
 
-The CAIRS framework provides one object named "cookie" on the top level of the framework. With this object you can create and get cookies with/from a given value or a key.
+The CAIRS framework provides one object named "cookie" on the top level namespace of the framework. With this object you can create and get cookies with/from a given value or a key.
+
+Acessing the cookie object
+	
+	CAIRS.cookie
 
 # Create cookie with a given value
 <a href="#cairs-framework">page top</a>
+
+	/**
+	@parameters:
+		
+		1 - cookie name -> string
+		2 - cookie value -> string
+		3 - duration (in days) -> integer or decimal
+	*/
+	var duration = 360; // in days
+	CAIRS.cookie.set( "cookie name", "cookie value", duration );
 
 # Create cookie with a given key
 <a href="#cairs-framework">page top</a>
