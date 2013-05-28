@@ -1,4 +1,4 @@
-## CAIRS Framework
+# CAIRS Framework
 
 * <a href="#init-framework">Init-Framework</a>
 * <a href="#browser-environment-properties">Browser-environment-properties</a>
