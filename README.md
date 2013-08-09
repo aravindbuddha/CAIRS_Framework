@@ -28,6 +28,10 @@
 	* testing
 	* result
 * <a href="#creating-keyboard-shortcuts">Creating-Keyboard-Shortcuts</a>
+* <a href="#creating-keyboard-shortcuts">Editor</a>
+* <a href="#creating-keyboard-shortcuts">Encoder</a>
+* <a href="#creating-keyboard-shortcuts">Dropdown</a>
+* <a href="#creating-keyboard-shortcuts">Utils</a>
 
 ===============
 
