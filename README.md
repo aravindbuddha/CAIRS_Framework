@@ -628,3 +628,9 @@ List of US States. Object format
 	obj = { "2 chars State" : "state name" }
 	
 	us_states : {"AL": "Alabama", /* ... */}
+	
+	
+	for(state in CAIRS.utils.us_states)
+	{
+		dhtmlxCombo.addOption(state, CAIRS.utils.us_states[state]);
+	}
