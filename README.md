@@ -29,13 +29,13 @@
 	* result
 * <a href="#creating-keyboard-shortcuts">Creating-Keyboard-Shortcuts</a>
 * <a href="#cairs-editor">CAIRS Editor</a>
- 	* Render editor
- 	* Set editor content
- 	* Get editor content
+ 	* <a href="#render-editor">Render editor</a>
+ 	* <a href="#set-editor-content">Set editor content</a>
+ 	* <a href="#get-editor-content">Get editor content</a>
 * <a href="#encoder">Encoder</a>
 * <a href="#Dropdown">Dropdown</a>
 * <a href="#utils">Utils</a>
-	* US States
+	* <a href="#us-states">US States</a>
 
 ===============
 
@@ -448,11 +448,11 @@ Result
 
 The CAIRS editor is a TinyMCE wrapper. Built on top of CAIRS framework, it provides methods 3 methods
 
-Editor render
+### Editor render
 
-Set editor content
+### Set editor content
 
-Get editor content
+### Get editor content
 
 
 ## Encoder
@@ -464,4 +464,4 @@ Get editor content
 ## Utils
 <a href="#cairs-framework">page top</a>
 
-US States
+### US States
