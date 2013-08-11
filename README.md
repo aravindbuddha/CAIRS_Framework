@@ -33,7 +33,7 @@
  	* <a href="#set-editor-content">Set editor content</a>
  	* <a href="#get-editor-content">Get editor content</a>
 * <a href="#encoder">Encoder</a>
-* <a href="#Dropdown">Dropdown</a>
+* <a href="#dropdown">Dropdown</a>
 * <a href="#utils">Utils</a>
 	* <a href="#us-states">US States</a>
 
