@@ -28,10 +28,14 @@
 	* testing
 	* result
 * <a href="#creating-keyboard-shortcuts">Creating-Keyboard-Shortcuts</a>
-* <a href="#creating-keyboard-shortcuts">Editor</a>
-* <a href="#creating-keyboard-shortcuts">Encoder</a>
-* <a href="#creating-keyboard-shortcuts">Dropdown</a>
-* <a href="#creating-keyboard-shortcuts">Utils</a>
+* <a href="#editor">CAIRS Editor</a>
+ 	* <a href="#editor-render">Render editor</a>
+ 	* <a href="#editor-set">Set editor content</a>
+ 	* <a href="#editor-get">Get editor content</a>
+* <a href="#encoder">Encoder</a>
+* <a href="#Dropdown">Dropdown</a>
+* <a href="#utils">Utils</a>
+	* <a href="#us-states">US States</a>
 
 ===============
 
@@ -438,3 +442,10 @@ Result
 		/* example: Sellect all elements of a grid now */
 		alert("Ctrl+Shift+A on keyboard");
 	});
+	
+## CAIRS Editor
+<a href="#cairs-framework">page top</a>
+
+The CAIRS editor is a TinyMCE wrapper. Built on top of CAIRS framework, it provides methods 3 methods
+
+## Editor render
