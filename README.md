@@ -448,18 +448,118 @@ Result
 
 The CAIRS editor is a TinyMCE wrapper. Built on top of CAIRS framework, it provides methods 3 methods
 
-### Editor render
+### Render editor
+
+	var formData = [{
+		type: "settings",
+		labelWidth: 130,
+		inputWidth: 170
+		, position: "label-left"
+	}, {
+		type: "input",
+		label: "Full Name",
+		value: "Kaapori Lumikaastra"
+	}, {
+		type: "input",
+		label: "Email",
+		value: "kaapori.lumi@gmail.com"
+	}, {
+		type: "container",
+		name: "myEditor",
+		label: "My Editor",
+		inputWidth: 330,
+		inputHeight: 339
+	},  {
+		type: "container",
+		name: "myEditor2",
+		label: "My Editor 2",
+		inputWidth: 330,
+		inputHeight: 339
+	},  {
+		type: "container",
+		name: "myEditor3",
+		label: "My Editor 3",
+		inputWidth: 330,
+		inputHeight: 339
+	}];
+	myForm = new dhtmlXForm("myForm", formData);
+	
+	
+	CAIRS.editor.render({
+		uid : 'example1'
+		,dhtmlxContainer : myForm.getContainer("myEditor")
+		,tinyMCEConfiguration : {
+			theme_advanced_toolbar_location : "top",
+			theme_advanced_toolbar_align : "left",
+			theme_advanced_statusbar_location : "bottom",
+			theme_advanced_resizing : true	
+		}
+		,width : 330
+		,height : 200
+	});
+	
+
+	
+	
+
 
 ### Set editor content
 
+	// example 1 - set content from a html div content
+	CAIRS.editor.set({
+		uid : 'example1'
+		,content : document.getElementById("content_test").innerHTML
+	});
+	
+	
+	// example 2 - set content from a js string
+	CAIRS.editor.set({
+		uid : 'example2'
+		,content : "Applicant(s) have ' \ \n \r  completed [insert hours] o"
+	});
+	
+	// example 3 - set content from database by an ajax call
+	dhtmlxAjax.get("read_datatabase.php",function(loader)
+	{
+		try
+		{	
+			var json = JSON.parse( loader.xmlDoc.responseText );
+			if( json.status == "success" )	
+			{
+	
+				CAIRS.editor.set({
+					uid : 'example3'
+					,content : json.content
+				});
+			}
+			else
+			{
+				dhtmlx.message( {type : "error", text : json.response} );
+			}
+		}
+		catch(e)
+		{
+			dhtmlx.message( {type : "error", text : "Fatal error on server side: "+loader.xmlDoc.responseText } );
+		}
+	});
+
 ### Get editor content
+
+	CAIRS.editor.get('example3')
+
+It returns encoded value using the encodeURIComponent function
+
 
 
 ## Encoder
 <a href="#cairs-framework">page top</a>
 
+
+
 ## Dropdown
 <a href="#cairs-framework">page top</a>
+
+
 
 ## Utils
 <a href="#cairs-framework">page top</a>
