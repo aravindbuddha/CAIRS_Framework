@@ -619,4 +619,12 @@ psychosocial_inventory_results1 : id of the html element which holder the dropdo
 ## Utils
 <a href="#cairs-framework">page top</a>
 
+Set of commom resources
+
 ### US States
+
+List of US States. Object format
+
+	obj = { "2 chars State" : "state name" }
+	
+	us_states : {"AL": "Alabama", /* ... */}
