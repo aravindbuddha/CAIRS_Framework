@@ -559,6 +559,55 @@ It returns encoded value using the encodeURIComponent function
 ## Dropdown
 <a href="#cairs-framework">page top</a>
 
+Build dropdowns from a given holder html element id
+
+	<div id="psychosocial_inventory_results1">
+
+	    <div id="childhood_family_adaptability_1" class="CAIRS_dropdown">
+	        <div class="selected_item">2</div>
+	        <ul>
+	            <li>na</li>
+	            <li>2</li>
+	            <li>1</li>
+	            <li>3/2</li>
+	            <li>3/3</li>
+	            <li>4/2</li>
+	            <li>4/3</li>
+	            <li>4/4</li>
+	            <li>5/2</li>
+	            <li>5/3</li>
+	            <li>5/4</li>
+	            <li>5/5</li>
+	        </ul>
+	    </div>
+	    
+	    <div id="childhood_family_adaptability_2" class="CAIRS_dropdown">
+	        <div class="selected_item">2</div>
+	        <ul>
+	            <li>na</li>
+	            <li>2</li>
+	            <li>1</li>
+	            <li>3/2</li>
+	            <li>3/3</li>
+	            <li>4/2</li>
+	            <li>4/3</li>
+	            <li>4/4</li>
+	            <li>5/2</li>
+	            <li>5/3</li>
+	            <li>5/4</li>
+	            <li>5/5</li>
+	        </ul>
+	    </div>
+	
+	</div>
+	
+	<script>
+		CAIRS.dropdown.renderAll("psychosocial_inventory_results1");
+	</script>
+
+
+psychosocial_inventory_results1 : id of the html element which holder the dropdowns
+
 
 
 ## Utils
