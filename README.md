@@ -608,12 +608,11 @@ Build dropdowns from a given holder html element id
 psychosocial_inventory_results1 : id of the html element which holder the dropdowns
 
 
-Returns a formated string usefull for an ajax request containing all editors name and selected value
-	<script>
-		
-		CAIRS.dropdown.getPostParams();
-		//"childhood_family_adaptability_1=2&childhood_family_adaptability_2=2"
-	</script>
+=> Returns a formated string usefull for an ajax request containing all editors name and selected value
+
+	CAIRS.dropdown.getPostParams();
+	//"childhood_family_adaptability_1=2&childhood_family_adaptability_2=2"
+
 	
 
 
