@@ -14,7 +14,7 @@ var CAIRS = {
 	loadScript : function (url, callback)
 	{
 		url = url + ".js";
-		var script = document.createElement('script')
+		var script = document.createElement('script');
 		script.type = 'text/javascript';
 	
 		if (script.readyState)
@@ -40,6 +40,45 @@ var CAIRS = {
     }
 	/* load javascript files - code injection */
 	
+	
+	,onDemand : {
+		queue : []
+		,load : function (url, callback)
+		{
+			var self = CAIRS.onDemand;
+			if( CAIRS.isArray( url ) )
+			{
+				url.forEach( function(path, index, array)
+				{
+					self.queue.push(path);
+				});
+			}
+			else
+			{
+				self.queue.push(url);
+			}
+			CAIRS.showDirections("Loading_Files");
+			self.process_queue( callback );
+		}
+		,process_queue : function( callback )
+		{
+			var self = CAIRS.onDemand;
+			//console.log(self.queue.length);
+			if(self.queue.length > 0)
+			{
+				var first_on_queue = self.queue.shift();
+				CAIRS.lScript(first_on_queue, function()
+				{
+					self.process_queue( callback );
+				});
+			}
+			else
+			{
+				CAIRS.hideDirections();
+				callback();
+			}
+		}
+	}
 
 	/**
 		@function loadScript -  load script - code injection
@@ -48,32 +87,351 @@ var CAIRS = {
 	*/
 	,lScript : function (url, callback)
 	{
-		var script = document.createElement('script')
-		script.type = 'text/javascript';
-	
-		if (script.readyState)
-		{  //IE
-			script.onreadystatechange = function()
+		var self = this, arrType, type, s, nodeType, node;
+		if(typeof document.getElementById(url) !== null)
+		{
+			
+			arrType = url.split(".");
+			type = arrType[arrType.length-1];
+			
+			if( type === 'css')
 			{
-				if (script.readyState == 'loaded' ||
-				script.readyState == 'complete')
+				nodeType = "link";
+				node = document.createElement(nodeType);
+				node.setAttribute("rel","stylesheet");
+				node.setAttribute("type","text/css");
+				node.setAttribute("href",url);
+			}
+			else
+			{
+				nodeType = "script";
+				node = document.createElement(nodeType);
+				node.setAttribute("type","text/javascript");
+				node.setAttribute("src",url);
+			}
+			
+			node.setAttribute("id", url);
+			
+			if (node.readyState)
+			{  //IE
+				node.onreadystatechange = function()
 				{
-					script.onreadystatechange = null;
+					if (node.readyState == 'loaded' ||
+					node.readyState == 'complete')
+					{
+						node.onreadystatechange = null;
+						callback();
+					}
+				};
+			}
+			else
+			{  //Others
+				node.onload = function(){
 					callback();
-				}
-			};
+				};
+			}
+			
+			document.getElementsByTagName('head')[0].appendChild(node);
+			
+			//s = document.getElementsByTagName('script')[0];
+			//s.parentNode.insertBefore(node, s);
 		}
-		else
-		{  //Others
-			script.onload = function(){
-				callback();
-			};
-		}
-		script.src = url;
-		document.getElementsByTagName('head')[0].appendChild(script);
     }	
 	/* load script - code injection */
 	
+	
+	,editor : {
+		
+		render : function( configuration )
+		{
+			
+			var self = CAIRS, width = 688, height = 400, existing_div, uid, div_wrapper;
+			
+			if(configuration.width)
+			{
+				width = configuration.width;
+			}
+			if(configuration.height)
+			{
+				height = configuration.height;
+			}
+		
+			uid = configuration.uid;
+			
+			if( (typeof configuration.existing_div !== 'undefined') && (configuration.existing_div !== false) )
+			{
+				existing_div = configuration.existing_div;
+			}
+			else
+			{
+				
+				existing_div = "cairs_editor_wrapper_" + uid;
+				
+				div_wrapper = document.createElement("div");
+				div_wrapper.setAttribute("id", existing_div);
+				
+				
+				if( (typeof configuration.dhtmlxContainer !== 'undefined') && (configuration.dhtmlxContainer !== false))
+				{
+					configuration.dhtmlxContainer.appendChild(div_wrapper);
+				}
+				else
+				{
+					document.body.appendChild(div_wrapper);
+				}
+				
+				
+			}
+			
+			//console.log(existing_div);
+			
+			var tinyMCEConfiguration = {
+				selector: "div#" + existing_div,
+				//theme: "modern",
+				width: width,
+				height: height,
+				mode: "exact",
+				//elements: "tinymce",
+				//theme: "advanced",
+				//plugins: 'ice',
+				//content_css: "css/content.css",
+				//toolbar: "insertfile undo redo |,search,replace,|,ice_togglechanges,ice_toggleshowchanges,iceacceptall,icerejectall,iceaccept,icereject |  styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage | forecolor backcolor emoticons", 
+				//theme : "advanced",
+				//plugins : "pagebreak,style,layer,table,save,advhr,advimage,advlink,emotions,iespell,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,xhtmlxtras,template",
+				theme_advanced_buttons1 : "save,newdocument,|,bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,|,styleselect,formatselect,fontselect,fontsizeselect",
+				theme_advanced_buttons2 : "cut,copy,paste,pastetext,pasteword,|,search,replace,|,bullist,numlist,|,outdent,indent,blockquote,|,undo,redo,|,link,unlink,anchor,image,cleanup,help,code,|,insertdate,inserttime,preview,|,forecolor,backcolor",
+				theme_advanced_buttons3 : "tablecontrols,|,hr,removeformat,visualaid,|,sub,sup,|,charmap,emotions,iespell,media,advhr,|,print,|,ltr,rtl,|,fullscreen",
+				theme_advanced_buttons4 : "insertlayer,moveforward,movebackward,absolute,|,styleprops,|,cite,abbr,acronym,del,ins,attribs,|,visualchars,nonbreaking,template,pagebreak",
+				//theme_advanced_toolbar_location : "top",
+				//theme_advanced_toolbar_align : "left",
+				//theme_advanced_statusbar_location : "bottom",
+				theme_advanced_resizing : true
+			}
+			
+			
+			
+			if( (typeof configuration.tinyMCEConfiguration !== 'undefined') && (configuration.tinyMCEConfiguration !== false) )
+			{
+				for( config in configuration.tinyMCEConfiguration)
+				{
+					tinyMCEConfiguration[config] = configuration.tinyMCEConfiguration[config];
+				}
+			}
+			
+			
+			
+			tinymce.init( tinyMCEConfiguration );	
+			return CAIRS.editor;
+		}
+		,set : function( c )
+		{
+			if(typeof c.uid !== 'undefined')
+			{
+				if(typeof c.content !== 'undefined')
+				{
+					window.setTimeout(function(){
+						tinyMCE.get( "cairs_editor_wrapper_" + c.uid ).setContent( c.content );
+					}, 1000);
+				}
+			}
+		}
+		,get : function( uid ){
+			if(typeof uid !== 'undefined')
+			{
+				return encodeURIComponent( tinyMCE.get( "cairs_editor_wrapper_" + uid ).getContent() );
+			}
+			else
+			{
+				return null;	
+			}
+		}
+		
+	}
+	
+	,Encoder : 
+	{
+		EncodeType:"entity",isEmpty:function(val)
+		{
+			if(val)
+			{
+				return((val===null)||val.length==0||/^\s+$/.test(val))
+			}else
+			{
+				return true
+			}
+		},
+		arr1:new Array('&nbsp;','&iexcl;','&cent;','&pound;','&curren;','&yen;','&brvbar;','&sect;','&uml;','&copy;','&ordf;','&laquo;','&not;','&shy;','&reg;','&macr;','&deg;','&plusmn;','&sup2;','&sup3;','&acute;','&micro;','&para;','&middot;','&cedil;','&sup1;','&ordm;','&raquo;','&frac14;','&frac12;','&frac34;','&iquest;','&Agrave;','&Aacute;','&Acirc;','&Atilde;','&Auml;','&Aring;','&Aelig;','&Ccedil;','&Egrave;','&Eacute;','&Ecirc;','&Euml;','&Igrave;','&Iacute;','&Icirc;','&Iuml;','&ETH;','&Ntilde;','&Ograve;','&Oacute;','&Ocirc;','&Otilde;','&Ouml;','&times;','&Oslash;','&Ugrave;','&Uacute;','&Ucirc;','&Uuml;','&Yacute;','&THORN;','&szlig;','&agrave;','&aacute;','&acirc;','&atilde;','&auml;','&aring;','&aelig;','&ccedil;','&egrave;','&eacute;','&ecirc;','&euml;','&igrave;','&iacute;','&icirc;','&iuml;','&eth;','&ntilde;','&ograve;','&oacute;','&ocirc;','&otilde;','&ouml;','&divide;','&Oslash;','&ugrave;','&uacute;','&ucirc;','&uuml;','&yacute;','&thorn;','&yuml;','&quot;','&amp;','&lt;','&gt;','&oelig;','&oelig;','&scaron;','&scaron;','&yuml;','&circ;','&tilde;','&ensp;','&emsp;','&thinsp;','&zwnj;','&zwj;','&lrm;','&rlm;','&ndash;','&mdash;','&lsquo;','&rsquo;','&sbquo;','&ldquo;','&rdquo;','&bdquo;','&dagger;','&dagger;','&permil;','&lsaquo;','&rsaquo;','&euro;','&fnof;','&alpha;','&beta;','&gamma;','&delta;','&epsilon;','&zeta;','&eta;','&theta;','&iota;','&kappa;','&lambda;','&mu;','&nu;','&xi;','&omicron;','&pi;','&rho;','&sigma;','&tau;','&upsilon;','&phi;','&chi;','&psi;','&omega;','&alpha;','&beta;','&gamma;','&delta;','&epsilon;','&zeta;','&eta;','&theta;','&iota;','&kappa;','&lambda;','&mu;','&nu;','&xi;','&omicron;','&pi;','&rho;','&sigmaf;','&sigma;','&tau;','&upsilon;','&phi;','&chi;','&psi;','&omega;','&thetasym;','&upsih;','&piv;','&bull;','&hellip;','&prime;','&prime;','&oline;','&frasl;','&weierp;','&image;','&real;','&trade;','&alefsym;','&larr;','&uarr;','&rarr;','&darr;','&harr;','&crarr;','&larr;','&uarr;','&rarr;','&darr;','&harr;','&forall;','&part;','&exist;','&empty;','&nabla;','&isin;','&notin;','&ni;','&prod;','&sum;','&minus;','&lowast;','&radic;','&prop;','&infin;','&ang;','&and;','&or;','&cap;','&cup;','&int;','&there4;','&sim;','&cong;','&asymp;','&ne;','&equiv;','&le;','&ge;','&sub;','&sup;','&nsub;','&sube;','&supe;','&oplus;','&otimes;','&perp;','&sdot;','&lceil;','&rceil;','&lfloor;','&rfloor;','&lang;','&rang;','&loz;','&spades;','&clubs;','&hearts;','&diams;'),
+		arr2:new Array('&#160;','&#161;','&#162;','&#163;','&#164;','&#165;','&#166;','&#167;','&#168;','&#169;','&#170;','&#171;','&#172;','&#173;','&#174;','&#175;','&#176;','&#177;','&#178;','&#179;','&#180;','&#181;','&#182;','&#183;','&#184;','&#185;','&#186;','&#187;','&#188;','&#189;','&#190;','&#191;','&#192;','&#193;','&#194;','&#195;','&#196;','&#197;','&#198;','&#199;','&#200;','&#201;','&#202;','&#203;','&#204;','&#205;','&#206;','&#207;','&#208;','&#209;','&#210;','&#211;','&#212;','&#213;','&#214;','&#215;','&#216;','&#217;','&#218;','&#219;','&#220;','&#221;','&#222;','&#223;','&#224;','&#225;','&#226;','&#227;','&#228;','&#229;','&#230;','&#231;','&#232;','&#233;','&#234;','&#235;','&#236;','&#237;','&#238;','&#239;','&#240;','&#241;','&#242;','&#243;','&#244;','&#245;','&#246;','&#247;','&#248;','&#249;','&#250;','&#251;','&#252;','&#253;','&#254;','&#255;','&#34;','&#38;','&#60;','&#62;','&#338;','&#339;','&#352;','&#353;','&#376;','&#710;','&#732;','&#8194;','&#8195;','&#8201;','&#8204;','&#8205;','&#8206;','&#8207;','&#8211;','&#8212;','&#8216;','&#8217;','&#8218;','&#8220;','&#8221;','&#8222;','&#8224;','&#8225;','&#8240;','&#8249;','&#8250;','&#8364;','&#402;','&#913;','&#914;','&#915;','&#916;','&#917;','&#918;','&#919;','&#920;','&#921;','&#922;','&#923;','&#924;','&#925;','&#926;','&#927;','&#928;','&#929;','&#931;','&#932;','&#933;','&#934;','&#935;','&#936;','&#937;','&#945;','&#946;','&#947;','&#948;','&#949;','&#950;','&#951;','&#952;','&#953;','&#954;','&#955;','&#956;','&#957;','&#958;','&#959;','&#960;','&#961;','&#962;','&#963;','&#964;','&#965;','&#966;','&#967;','&#968;','&#969;','&#977;','&#978;','&#982;','&#8226;','&#8230;','&#8242;','&#8243;','&#8254;','&#8260;','&#8472;','&#8465;','&#8476;','&#8482;','&#8501;','&#8592;','&#8593;','&#8594;','&#8595;','&#8596;','&#8629;','&#8656;','&#8657;','&#8658;','&#8659;','&#8660;','&#8704;','&#8706;','&#8707;','&#8709;','&#8711;','&#8712;','&#8713;','&#8715;','&#8719;','&#8721;','&#8722;','&#8727;','&#8730;','&#8733;','&#8734;','&#8736;','&#8743;','&#8744;','&#8745;','&#8746;','&#8747;','&#8756;','&#8764;','&#8773;','&#8776;','&#8800;','&#8801;','&#8804;','&#8805;','&#8834;','&#8835;','&#8836;','&#8838;','&#8839;','&#8853;','&#8855;','&#8869;','&#8901;','&#8968;','&#8969;','&#8970;','&#8971;','&#9001;','&#9002;','&#9674;','&#9824;','&#9827;','&#9829;','&#9830;'),
+		HTML2Numerical:function(s)
+		{
+			return this.swapArrayVals(s,this.arr1,this.arr2)
+		},
+		NumericalToHTML:function(s)
+		{
+			return this.swapArrayVals(s,this.arr2,this.arr1)
+		},
+		numEncode:function(s)
+		{
+			if(this.isEmpty(s))return"";
+			var e="";
+			for(var i=0;i<s.length;i++)
+			{
+				var c=s.charAt(i);
+				if(c<" "||c>"~")
+				{
+					c="&#"+c.charCodeAt()+";"
+				}
+				e+=c
+			}
+			return e
+		},
+		htmlDecode:function(s)
+		{
+			var c,m,d=s;
+			if(this.isEmpty(d))return"";
+			d=this.HTML2Numerical(d);
+			arr=d.match(/&#[0-9]{1,5};/g);
+			if(arr!=null)
+			{
+				for(var x=0;x<arr.length;x++)
+				{
+					m=arr[x];
+					c=m.substring(2,m.length-1);
+					if(c>=-32768&&c<=65535)
+					{
+						d=d.replace(m,String.fromCharCode(c))
+					}
+					else
+					{
+						d=d.replace(m,"")
+					}
+				}
+			}
+			return d
+		},
+		htmlEncode:function(s,dbl)
+		{
+			if(this.isEmpty(s))return"";
+			dbl=dbl||false;
+			if(dbl)
+			{
+				if(this.EncodeType=="numerical")
+				{
+					s=s.replace(/&/g,"&#38;")
+				}
+				else
+				{
+					s=s.replace(/&/g,"&amp;")
+				}
+			}
+			s=this.XSSEncode(s,false);
+			if(this.EncodeType=="numerical"||!dbl)
+			{
+				s=this.HTML2Numerical(s)
+			}
+			s=this.numEncode(s);
+			if(!dbl)
+			{
+				s=s.replace(/&#/g,"##AMPHASH##");
+				if(this.EncodeType=="numerical")
+				{
+					s=s.replace(/&/g,"&#38;")
+				}
+				else
+				{
+					s=s.replace(/&/g,"&amp;")
+				}
+				s=s.replace(/##AMPHASH##/g,"&#")
+			}
+			s=s.replace(/&#\d*([^\d;]|$)/g,"$1");
+			if(!dbl)
+			{
+				s=this.correctEncoding(s)
+			}
+			if(this.EncodeType=="entity")
+			{
+				s=this.NumericalToHTML(s)
+			}
+			return s
+		},
+		XSSEncode:function(s,en)
+		{
+			if(!this.isEmpty(s))
+			{
+				en=en||true;
+				if(en)
+				{
+					s=s.replace(/\'/g,"&#39;");
+					s=s.replace(/\"/g,"&quot;");
+					s=s.replace(/</g,"&lt;");
+					s=s.replace(/>/g,"&gt;")
+				}
+				else
+				{
+					s=s.replace(/\'/g,"&#39;");
+					s=s.replace(/\"/g,"&#34;");
+					s=s.replace(/</g,"&#60;");
+					s=s.replace(/>/g,"&#62;")
+				}
+				return s
+			}
+			else
+			{
+				return""
+			}
+		},
+		hasEncoded:function(s)
+		{
+			if(/&#[0-9]{1,5};/g.test(s))
+			{
+				return true
+			}
+			else if(/&[A-Z]{2,6};/gi.test(s))
+			{
+				return true
+			}
+			else
+			{
+				return false
+			}
+		},
+		stripUnicode:function(s)
+		{
+			return s.replace(/[^\x20-\x7E]/g,"")
+		},
+		correctEncoding:function(s)
+		{
+			return s.replace(/(&amp;)(amp;)+/,"$1")
+		},
+		swapArrayVals:function(s,arr1,arr2)
+		{
+			if(this.isEmpty(s))return"";
+			var re;
+			if(arr1&&arr2)
+			{
+				if(arr1.length==arr2.length)
+				{
+					for(var x=0,i=arr1.length;x<i;x++)
+					{
+						re=new RegExp(arr1[x],'g');
+						s=s.replace(re,arr2[x])
+					}
+				}
+			}
+			return s
+		},
+		inArray:function(item,arr)
+		{
+			for(var i=0,x=arr.length;i<x;i++)
+			{
+				if(arr[i]===item)
+				{
+					return i
+				}
+			}
+			return-1
+		}
+	}
 	
 	,getMousePosition : function(e, cordinate) {
 		
@@ -448,11 +806,25 @@ var CAIRS = {
 		//alert(self.Browser.plugins);
 	}
 	
+	,hideDirections : function()
+	{
+		try
+		{
+			document.getElementById("CAIRS_wrapper_splash").style.display = "none";
+			document.getElementById("CAIRS_splash").style.display = "none";	
+		}
+		catch(e)
+		{
+			
+		}
+	}
+	
 	,showDirections : function(m)
 	{
 		var self = this, template = '', div_wrapper, div_splash;
 		div_wrapper = document.createElement("DIV");
 		div_wrapper.setAttribute("style", '-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=50)"; filter: alpha(opacity=50);');
+		div_wrapper.setAttribute("id", 'CAIRS_wrapper_splash');
 		div_wrapper.style.width = "100%";
 		div_wrapper.style.height = "100%";
 		div_wrapper.style.position = "fixed";
@@ -464,10 +836,19 @@ var CAIRS = {
 		
 		div_splash = document.createElement("DIV");
 		div_splash.setAttribute("style", 'font-size:14px;padding-top:295px;padding-right:50px;padding-left:8px;color:#333333;line-height:18px;font-family:arial;');
+		div_splash.setAttribute("id", 'CAIRS_splash');
 		div_splash.style.width = "442px";
 		div_splash.style.height = "80px";
 		div_splash.style.position = "fixed";
 		//div_splash.style.margin = "auto";
+		
+		
+		if( self.windowHeight == 0)
+		{
+			self.getAndSetWindowDimension();
+		}
+		
+		
 		div_splash.style.top = ((self.windowHeight / 2) - 183) + "px";
 		div_splash.style.left = ((self.windowWidth / 2) - 250) + "px";
 		div_splash.style.zIndex = "999999";
@@ -490,18 +871,40 @@ var CAIRS = {
 			template = template + 'or ActiveXs are disabled <br>';
 			template = template + 'Close your browser and open the Internet Explorer again by reaching:<br><b>Start menu -> All Programs -> Internet Explorer</b>';
 		}
+		else if(m === "Loading_Files")
+		{
+			template = template + '';
+			template = template + '<b>Loading files ...</b><br>';
+			template = template + 'please wait!';
+		}
 		
 		div_splash.innerHTML = template;
 		
-		try{
-			document.body.appendChild(div_wrapper);
-			document.body.appendChild(div_splash);
-		}
-		catch(e)
+		
+		//document.getElementById("CAIRS_wrapper_splash").style.display = "none";
+		//document.getElementById("CAIRS_splash").style.display = "none";
+		
+		
+		if(document.getElementById("CAIRS_wrapper_splash") === null)
 		{
-			document.getElementsByTagName('body')[0].appendChild(div_wrapper);
-			document.getElementsByTagName('body')[0].appendChild(div_splash);
+			try{
+				document.body.appendChild(div_wrapper);
+				document.body.appendChild(div_splash);
+			}
+			catch(e)
+			{
+				document.getElementsByTagName('body')[0].appendChild(div_wrapper);
+				document.getElementsByTagName('body')[0].appendChild(div_splash);
+			}
 		}
+		else
+		{
+			document.getElementById("CAIRS_wrapper_splash").style.display = "block";
+			document.getElementById("CAIRS_splash").style.display = "block";
+		}
+		
+		
+		
 		
 		
 	}
@@ -581,6 +984,12 @@ var CAIRS = {
 	
 	,isNumber : function(n) {
 	  return !isNaN(parseFloat(n)) && isFinite(n);
+	}
+	
+	,isValidDate : function(d) {
+	  if ( Object.prototype.toString.call(d) !== "[object Date]" )
+		return false;
+	  return !isNaN(d.getTime());
 	}
 	
 	,toCurrency : function(num) {
@@ -1162,6 +1571,13 @@ var CAIRS = {
 			obj.childNodes[1].innerHTML = value;
 			self.closeOpened();
 		}
+		,setValue : function(objId, value)
+		{
+			var self = CAIRS.dropdown;
+			var obj = document.getElementById( objId );
+			obj.childNodes[1].innerHTML = value;
+			self.closeOpened();
+		}
 		,getSelectedValue : function(objID)
 		{
 			try
@@ -1202,6 +1618,7 @@ var CAIRS = {
 					//console.log(dropdownId + "  varchar(255),");
 					//console.log("'$"+dropdownId+"',");
 					//console.log(dropdownId + ",");
+					//console.log("'"+dropdownId+"' => $row['"+dropdownId+"']");
 					
 				}
 				return postStr.substr( 1, postStr.length );
@@ -1255,18 +1672,369 @@ var CAIRS = {
 	
 	
 	,utils : {
-		us_states : {"AL": "Alabama","AK": "Alaska","AS": "American Samoa","AZ": "Arizona","AR": "Arkansas","CA": "California","CO": "Colorado","CT": "Connecticut","DE": "Delaware","DC": "District Of Columbia","FM": "Federated States Of Micronesia","FL": "Florida","GA": "Georgia","GU": "Guam","HI": "Hawaii","ID": "Idaho","IL": "Illinois","IN": "Indiana","IA": "Iowa","KS": "Kansas","KY": "Kentucky","LA": "Louisiana","ME": "Maine","MH": "Marshall Islands","MD": "Maryland","MA": "Massachusetts","MI": "Michigan","MN": "Minnesota","MS": "Mississippi","MO": "Missouri","MT": "Montana","NE": "Nebraska","NV": "Nevada","NH": "New Hampshire","NJ": "New Jersey","NM": "New Mexico","NY": "New York","NC": "North Carolina","ND": "North Dakota","MP": "Northern Mariana Islands","OH": "Ohio","OK": "Oklahoma","OR": "Oregon","PW": "Palau","PA": "Pennsylvania","PR": "Puerto Rico","RI": "Rhode Island","SC": "South Carolina","SD": "South Dakota","TN": "Tennessee","TX": "Texas","UT": "Utah","VT": "Vermont","VI": "Virgin Islands","VA": "Virginia","WA": "Washington","WV": "West Virginia","WI": "Wisconsin","WY": "Wyoming"}	
+		us_states : {"AL": "Alabama","AK": "Alaska","AS": "American Samoa","AZ": "Arizona","AR": "Arkansas","CA": "California","CO": "Colorado","CT": "Connecticut","DE": "Delaware","DC": "District Of Columbia","FL": "Florida","GA": "Georgia","GU": "Guam","HI": "Hawaii","ID": "Idaho","IL": "Illinois","IN": "Indiana","IA": "Iowa","KS": "Kansas","KY": "Kentucky","LA": "Louisiana","ME": "Maine","MH": "Marshall Islands","MD": "Maryland","MA": "Massachusetts","MI": "Michigan","MN": "Minnesota","MS": "Mississippi","MO": "Missouri","MT": "Montana","NE": "Nebraska","NV": "Nevada","NH": "New Hampshire","NJ": "New Jersey","NM": "New Mexico","NY": "New York","NC": "North Carolina","ND": "North Dakota","MP": "Northern Mariana Islands","OH": "Ohio","OK": "Oklahoma","OR": "Oregon","PW": "Palau","PA": "Pennsylvania","PR": "Puerto Rico","RI": "Rhode Island","SC": "South Carolina","SD": "South Dakota","TN": "Tennessee","TX": "Texas","UT": "Utah","VT": "Vermont","VI": "Virgin Islands","VA": "Virginia","WA": "Washington","WV": "West Virginia","WI": "Wisconsin","WY": "Wyoming"}	
 	}
 	
+	/*TITLE: Client-Side Request Object for javascript by Andrew Urquhart (UK) http://andrewu.co.uk/tools/request/manual/ VERSION: #1.41 2007-06-28 18:10 UTC*/
+	,Request : new function ()
+	{
+	//function RObj(ea) {
+		var LS	= "";
+		var QS	= new Object();
+		var un	= "undefined";
+		var x	= null; // On platforms that understand the 'undefined' keyword replace 'null' with 'undefined' for maximum ASP-like behaviour.
+		var f	= "function";
+		var n	= "number";
+		var r	= "string";
+		var e1	= "ERROR: Index out of range in\r\nRequest.QueryString";
+		var e2	= "ERROR: Wrong number of arguments or invalid property assignment\r\nRequest.QueryString";
+		var e3	= "ERROR: Object doesn't support this property or method\r\nRequest.QueryString.Key";
+		var dU	= window.decodeURIComponent ? 1 : 0;
 	
+		function Err(arg) {
+			if (ea) {
+				alert("Request Object:\r\n" + arg);
+			}
+		}
+		function URID(t) {
+			var d = "";
+			if (t) {
+				for (var i = 0; i < t.length; ++i) {
+					var c = t.charAt(i);
+					d += (c  ==  "+" ? " " : c);
+				}
+			}
+			return (dU ? decodeURIComponent(d) : unescape(d));
+		}
+		function OL(o) {
+			var l = 0;
+			for (var i in o) {
+				if (typeof o[i] != f) {
+					l++;
+				}
+			}
+			return l;
+		}
+		function AK(key) {
+			var auk = true;
+			for (var u in QS) {
+				if (typeof QS[u] != f && u.toString().toLowerCase() == key.toLowerCase()) {
+					auk = false;
+					return u;
+				}
+			}
+			if (auk) {
+				QS[key] = new Object();
+				QS[key].toString = function() {
+					return TS(QS[key]);
+				}
+				QS[key].Count = function() {
+					return OL(QS[key]);
+				}
+				QS[key].Count.toString = function() {
+					return OL(QS[key]).toString();
+				}
+				QS[key].Item = function(e) {
+					if (typeof e == un) {
+						return QS[key];
+					}
+					else {
+						if (typeof e == n) {
+							var a = QS[key][Math.ceil(e)];
+							if (typeof a == un) {
+								Err(e1 + "(\"" + key + "\").Item(" + e + ")");
+							}
+							return a;
+						}
+						else {
+							Err("ERROR: Expecting numeric input in\r\nRequest.QueryString(\"" + key + "\").Item(\"" + e + "\")");
+						}
+					}
+				}
+				QS[key].Item.toString = function(e) {
+					if (typeof e == un) {
+						return QS[key].toString();
+					}
+					else {
+						var a = QS[key][e];
+						if (typeof a == un) {
+							Err(e1 + "(\"" + key + "\").Item(" + e + ")");
+						}
+						return a.toString();
+					}
+				}
+				QS[key].Key = function(e) {
+					var t = typeof e;
+					if (t == r) {
+						var a = QS[key][e];
+						return (typeof a != un && a && a.toString() ? e : "");
+					}
+					else {
+						Err(e3 + "(" + (e ? e : "") + ")");
+					}
+				}
+				QS[key].Key.toString = function() {
+					return x;
+				}
+			}
+			return key;
+		}
+		function AVTK(key, val) {
+			if (key != "") {
+				var key = AK(key);
+				var l = OL(QS[key]);
+				QS[key][l + 1] = val;
+			}
+		}
+		function TS(o) {
+			var s = "";
+			for (var i in o) {
+				var ty = typeof o[i];
+				if (ty == "object") {
+					s += TS(o[i]);
+				}
+				else if (ty != f) {
+					s += o[i] + ", ";
+				}
+			}
+			var l = s.length;
+			if (l > 1) {
+				return (s.substring(0, l-2));
+			}
+			return (s == "" ? x : s);
+		}
+		function KM(k, o) {
+			var k = k.toLowerCase();
+			for (var u in o) {
+				if (typeof o[u] != f && u.toString().toLowerCase() == k) {
+					return u;
+				}
+			}
+		}
+		if (window.location && window.location.search) {
+			LS = window.location.search;
+			var l = LS.length;
+			if (l > 0) {
+				LS = LS.substring(1,l);
+				var preAmpAt = 0;
+				var ampAt = -1;
+				var eqAt = -1;
+				var k = 0;
+				var skip = false;
+				for (var i = 0; i < l; ++i) {
+					var c = LS.charAt(i);
+
+					if (LS.charAt(preAmpAt) == "=" || (preAmpAt == 0 && i == 0 && c == "=")) {
+						skip=true;
+					}
+					if (c == "=" && eqAt == -1 && !skip) {
+						eqAt=i;
+					}
+					if (c == "&" && ampAt == -1) {
+						if (eqAt!=-1) {
+							ampAt=i;
+						}
+						if (skip) {
+							preAmpAt = i + 1;
+						}
+						skip = false;
+					}
+					if (ampAt>eqAt) {
+						AVTK(URID(LS.substring(preAmpAt, eqAt)), URID(LS.substring(eqAt + 1, ampAt)));
+						preAmpAt = ampAt + 1;
+						eqAt = ampAt = -1;
+						++k;
+					}
+				}
+				if (LS.charAt(preAmpAt) != "=" && (preAmpAt != 0 || i != 0 || c != "=")) {
+					if (preAmpAt != l) {
+						if (eqAt != -1) {
+							AVTK(URID(LS.substring(preAmpAt,eqAt)), URID(LS.substring(eqAt + 1,l)));
+						}
+						else if (preAmpAt != l - 1) {
+							AVTK(URID(LS.substring(preAmpAt, l)), "");
+						}
+					}
+					if (l == 1) {
+						AVTK(LS.substring(0,1),"");
+					}
+				}
+			}
+		}
+		var TC = OL(QS);
+		if (!TC) {
+			TC=0;
+		}
+		QS.toString = function() {
+			return LS.toString();
+		}
+		QS.Count = function() {
+			return (TC ? TC : 0);
+		}
+		QS.Count.toString = function() {
+			return (TC ? TC.toString() : "0");
+		}
+		QS.Item = function(e) {
+			if (typeof e == un) {
+				return LS;
+			}
+			else {
+				if (typeof e == n) {
+					var e = Math.ceil(e);
+					var c = 0;
+					for (var i in QS) {
+						if (typeof QS[i] != f && ++c == e) {
+							return QS[i];
+						}
+					}
+					Err(e1 + "().Item(" + e + ")");
+				}
+				else {
+					return QS[KM(e, QS)];
+				}
+			}
+			return x;
+		}
+		QS.Item.toString = function() {
+			return LS.toString();
+		}
+		QS.Key = function(e) {
+			var t = typeof e;
+			if (t == n) {
+				var e = Math.ceil(e);
+				var c = 0;
+				for (var i in QS) {
+					if (typeof QS[i] != f && ++c == e) {
+						return i;
+					}
+				}
+			}
+			else if (t == r) {
+				var e = KM(e, QS);
+				var a = QS[e];
+				return (typeof a != un && a && a.toString() ? e : "");
+			}
+			else {
+				Err(e2 + "().Key(" + (e ? e : "") + ")");
+			}
+			Err(e1 + "().Item(" + e + ")");
+		}
+		QS.Key.toString = function() {
+			Err(e2 + "().Key");
+		}
+		this.QueryString = function(k) {
+			if (typeof k == un) {
+				return QS;
+			}
+			else {
+				if (typeof k == n) {
+					return QS.Item(k);
+				}
+				var k = KM(k, QS);
+				if (typeof QS[k] == un) {
+					t = new Object();
+					t.Count = function() {
+						return 0;
+					}
+					t.Count.toString = function() {
+						return "0";
+					}
+					t.toString = function() {
+						return x;
+					}
+					t.Item = function(e) {
+						return x;
+					}
+					t.Item.toString = function() {
+						return x;
+					}
+					t.Key = function(e) {
+						Err(e3 + "(" + (e ? e : "") + ")");
+					}
+					t.Key.toString = function() {
+						return x;
+					}
+					return t;
+				}
+				else {
+					return QS[k];
+				}
+			}
+		}
+		this.QueryString.toString = function() {
+			return LS.toString();
+		}
+		this.QueryString.Count = function() {
+			return (TC ? TC : 0);
+		}
+		this.QueryString.Count.toString = function() {
+			return (TC ? TC.toString() : "0");
+		}
+		this.QueryString.Item = function(e) {
+			if (typeof e == un) {
+				return LS.toString();
+			}
+			else {
+				if (typeof e == n) {
+					var e = Math.ceil(e);
+					var c = 0;
+					for (var i in QS) {
+						if (typeof QS[i] != f && ++c == e) {
+							return QS[i];
+						}
+					}
+					Err(e1 + ".Item(" + e + ")");
+				}
+				else {
+					return QS[KM(e, QS)];
+				}
+			}
+			if (typeof e == n) {
+				Err(e1 + ".Item(" + e + ")");
+			}
+			return x;
+		}
+		this.QueryString.Item.toString = function() {
+			return LS.toString();
+		}
+		this.QueryString.Key = function(e) {
+			var t = typeof e;
+			if (t == n) {
+				var e = Math.ceil(e);
+				var c = 0;
+				for (var i in QS) {
+					if (typeof QS[i] == "object" && (++c == e)) {
+						return i;
+					}
+				}
+			}
+			else if (t == r) {
+				var e = KM(e, QS);
+				var a = QS[e];
+				return (typeof a != un && a && a.toString() ? e : "");
+			}
+			else {
+				Err(e2 + ".Key(" + (e ? e : "") + ")");
+			}
+			Err(e1 + ".Item(" + e + ")");
+		}
+		this.QueryString.Key.toString = function() {
+			Err(e2 + ".Key");
+		}
+		
+		
+		this.Version = 1.4;
+		this.Author = "Andrew Urquhart (http://andrewu.co.uk)";
+	}//var Request = new RObj(false);
+	
+	,$_GET : function(id){
+			return CAIRS.Request.QueryString(id).Item(1);
+	}
 	
 	,test : function()
 	{
 		//console.log("parent ok");	
 	}
-	
-	,initialized_plugins : []
-	,initialized_plugins : []
 	
 	/**
 		@function init -  performs all the necessary tasks before let the user to use the CAIRS object
