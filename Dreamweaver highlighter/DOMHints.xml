@@ -236,6 +236,8 @@
 	<!-- CAIRS -->
 	<property label="windowWidth"	source="CAIRS Framework" 	object="CAIRS"	icon="shared/mm/images/hintProperty.png"/>
 	<property label="windowHeight"	source="CAIRS Framework" 	object="CAIRS"	icon="shared/mm/images/hintProperty.png"/>
+	
+	<method pattern="checkMAPRequirements()"	source="CAIRS Framework" 	object="CAIRS"	icon="shared/mm/images/hintFunction.png"/>
 	<method pattern="loadScript()"	source="CAIRS Framework" 	object="CAIRS"	icon="shared/mm/images/hintFunction.png"/>
 	<method pattern="lScript()"	source="CAIRS Framework" 	object="CAIRS"	icon="shared/mm/images/hintFunction.png"/>
 	<method pattern="getMousePosition()"	source="CAIRS Framework" 	object="CAIRS"	icon="shared/mm/images/hintFunction.png"/>
@@ -257,12 +259,18 @@
 	<property label="xml"	source="CAIRS Framework" 	object="CAIRS"	icon="shared/mm/images/codeHintEvent.gif"  propType="xml"/>
 	<property label="cookie"	source="CAIRS Framework" 	object="CAIRS"	icon="shared/mm/images/codeHintEvent.gif"  propType="cookie"/>
 	<method pattern="init()"	source="CAIRS Framework" 	object="CAIRS"	icon="shared/mm/images/hintFunction.png"/>
+	<property label="MAP"	source="CAIRS Framework" 	object="CAIRS"	icon="shared/mm/images/codeHintEvent.gif"  propType="MAP"/>
+	<property label="onDemand"	source="CAIRS Framework" 	object="CAIRS"	icon="shared/mm/images/codeHintEvent.gif"  propType="onDemand"/>
+	<property label="dhtmlx"	source="CAIRS Framework" 	object="CAIRS"	icon="shared/mm/images/codeHintEvent.gif"  propType="dhtmlx"/>
+	
   </menu>
   
   <menu pattern="CAIRS." casesensitive="true" displayrestriction="JavaScript" additionaldismisschars=".;">
 	<!-- CAIRS -->
 	<menuitem label="windowWidth"	source="CAIRS Framework" 	object="CAIRS"	icon="shared/mm/images/hintProperty.png"/>
 	<menuitem label="windowHeight"	source="CAIRS Framework" 	object="CAIRS"	icon="shared/mm/images/hintProperty.png"/>
+	
+	<menuitem label="checkMAPRequirements()"	source="CAIRS Framework" 	object="CAIRS"	icon="shared/mm/images/hintFunction.png"/>
 	<menuitem label="loadScript()"	source="CAIRS Framework" 	object="CAIRS"	icon="shared/mm/images/hintFunction.png"/>
 	<menuitem label="lScript()"	source="CAIRS Framework" 	object="CAIRS"	icon="shared/mm/images/hintFunction.png"/>
 	<menuitem label="getMousePosition()"	source="CAIRS Framework" 	object="CAIRS"	icon="shared/mm/images/hintFunction.png"/>
@@ -284,11 +292,93 @@
 	<menuitem label="xml"	source="CAIRS Framework" 	object="CAIRS"	icon="shared/mm/images/codeHintEvent.gif"/>
 	<menuitem label="cookie"	source="CAIRS Framework" 	object="CAIRS"	icon="shared/mm/images/codeHintEvent.gif"/>
 	<menuitem label="init()"	source="CAIRS Framework" 	object="CAIRS"	icon="shared/mm/images/hintFunction.png"/>
+	
+	
+	<menuitem label="MAP"	source="CAIRS Framework" 	object="CAIRS"	icon="shared/mm/images/codeHintEvent.gif"/>
+	<menuitem label="onDemand"	source="CAIRS Framework" 	object="CAIRS"	icon="shared/mm/images/codeHintEvent.gif"/>
+	<menuitem label="dhtmlx"	source="CAIRS Framework" 	object="CAIRS"	icon="shared/mm/images/codeHintEvent.gif"/>
+	
+	
+	
   </menu>
   
   <menu classpattern="xml" casesensitive="true" displayrestriction="JavaScript" additionaldismisschars=".;">
 	<method pattern="fromJSON( json, isRoot, parentNode, xmlDoc )"					source="CAIRS Framework"	icon="shared/mm/images/hintFunction.png" object="xml in CAIRS"/>
 	<method pattern="serialize( xmlDoc )"					source="CAIRS Framework"	icon="shared/mm/images/hintFunction.png" object="xml in CAIRS"/>
+  </menu>
+  
+  <menu classpattern="onDemand" casesensitive="true" displayrestriction="JavaScript" additionaldismisschars=".;">
+	<property label="queue"					source="CAIRS Framework"	icon="shared/mm/images/hintProperty.png" object="queue in onDemand in CAIRS"/>
+	<method pattern="load( url, callback )"					source="CAIRS Framework"	icon="shared/mm/images/hintFunction.png" object="load in onDemand in CAIRS"/>
+	<method pattern="process_queue( callback )"					source="CAIRS Framework"	icon="shared/mm/images/hintFunction.png" object="process_queue in onDemand in CAIRS"/>
+	
+  </menu>
+  
+  <menu classpattern="MAP" casesensitive="true" displayrestriction="JavaScript" additionaldismisschars=".;">
+	<property label="API"	source="CAIRS Framework" 	object="CAIRS"	icon="shared/mm/images/codeHintEvent.gif"  propType="API"/>
+  </menu>
+  <menu pattern="MAP." casesensitive="true" displayrestriction="JavaScript" additionaldismisschars=".;">
+	<!-- CAIRS -->
+	<menuitem label="API"	source="CAIRS Framework" 	object="CAIRS"	icon="shared/mm/images/codeHintEvent.gif"/>
+	
+  </menu>
+  
+  <menu classpattern="API" casesensitive="true" displayrestriction="JavaScript" additionaldismisschars=".;">
+	<property label="appName"					source="CAIRS Framework"	icon="shared/mm/images/hintProperty.png" object="appName in API in MAP in CAIRS"/>
+	<property label="apiURL"					source="CAIRS Framework"	icon="shared/mm/images/hintProperty.png" object="apiURL in API in MAP in CAIRS"/>
+	<property label="token"					source="CAIRS Framework"	icon="shared/mm/images/hintProperty.png" object="token in API in MAP in CAIRS"/>
+	<property label="auth_status"					source="CAIRS Framework"	icon="shared/mm/images/hintProperty.png" object="auth_status in API in MAP in CAIRS"/>
+	<property label="request"					source="CAIRS Framework"	icon="shared/mm/images/hintProperty.png" object="request in API in MAP in CAIRS"/>
+	<property label="isXDR"					source="CAIRS Framework"	icon="shared/mm/images/hintProperty.png" object="isXDR in API in MAP in CAIRS"/>
+	
+	
+	<property label="XMLHttpFactories"					source="CAIRS Framework"	icon="shared/mm/images/hintProperty.png" object="XMLHttpFactories in API in MAP in CAIRS"/>
+
+	
+	<method pattern="getMappedURL( configuration )"					source="CAIRS Framework"	icon="shared/mm/images/hintFunction.png" object="getMappedURL in API in MAP in CAIRS"/>
+	
+	<method pattern="createHttpConnection()"					source="CAIRS Framework"	icon="shared/mm/images/hintFunction.png" object="createHttpConnection in API in MAP in CAIRS"/>
+	<method pattern="startAjax()"					source="CAIRS Framework"	icon="shared/mm/images/hintFunction.png" object="startAjax in API in MAP in CAIRS"/>
+	<method pattern="ajax( json )"					source="CAIRS Framework"	icon="shared/mm/images/hintFunction.png" object="ajax in API in MAP in CAIRS"/>
+	<method pattern="post( configuration )"					source="CAIRS Framework"	icon="shared/mm/images/hintFunction.png" object="post in API in MAP in CAIRS"/>
+	<method pattern="insert( configuration )"					source="CAIRS Framework"	icon="shared/mm/images/hintFunction.png" object="shortcut to put in API in MAP in CAIRS"/>
+	<method pattern="put( configuration )"					source="CAIRS Framework"	icon="shared/mm/images/hintFunction.png" object="put in API in MAP in CAIRS"/>
+	<method pattern="update( configuration )"					source="CAIRS Framework"	icon="shared/mm/images/hintFunction.png" object="shortcut to put in API in MAP in CAIRS"/>
+	<method pattern="get( configuration )"					source="CAIRS Framework"	icon="shared/mm/images/hintFunction.png" object="get in API in MAP in CAIRS"/>
+	<method pattern="list( configuration )"					source="CAIRS Framework"	icon="shared/mm/images/hintFunction.png" object="shortcut to get in API in MAP in CAIRS"/>
+	<method pattern="del( configuration )"					source="CAIRS Framework"	icon="shared/mm/images/hintFunction.png" object="del in API in MAP in CAIRS"/>
+	
+  </menu>
+  
+  
+  <menu classpattern="dhtmlx" casesensitive="true" displayrestriction="JavaScript" additionaldismisschars=".;">
+	<property label="formFields"					source="CAIRS Framework"	icon="shared/mm/images/hintProperty.png" object="formFields in dhtmlx in CAIRS"/>
+	<property label="formFields_tofill"					source="CAIRS Framework"	icon="shared/mm/images/hintProperty.png" object="formFields_tofill in dhtmlx in CAIRS"/>
+	<property label="formFields_filled"					source="CAIRS Framework"	icon="shared/mm/images/hintProperty.png" object="formFields_filled in dhtmlx in CAIRS"/>
+	<property label="text_labels"					source="CAIRS Framework"	icon="shared/mm/images/hintProperty.png" object="text_labels in dhtmlx in CAIRS"  propType="text_labels"/>
+	<method pattern="prepareForm( uid, JSONformConfiguration, DHTMLXForm )"					source="CAIRS Framework"	icon="shared/mm/images/hintFunction.png" object="prepareForm in dhtmlx in CAIRS"/>
+	<method pattern="_setFormFieldsToBind(json, uid, appended_on_the_fly)"					source="CAIRS Framework"	icon="shared/mm/images/hintFunction.png" object="_setFormFieldsToBind in dhtmlx in CAIRS"/>
+	<method pattern="_setFormMasks( uid, DHTMLXForm )"					source="CAIRS Framework"	icon="shared/mm/images/hintFunction.png" object="_setFormMasks in dhtmlx in CAIRS"/>
+	<method pattern="getFormItem( name, uid )"					source="CAIRS Framework"	icon="shared/mm/images/hintFunction.png" object="getFormItem in dhtmlx in CAIRS"/>
+	<method pattern="getFormDataAsPayload( uid, DHTMLXForm )"					source="CAIRS Framework"	icon="shared/mm/images/hintFunction.png" object="getFormDataAsPayload in dhtmlx in CAIRS"/>
+	<method pattern="validateForm( uid, DHTMLXForm )"					source="CAIRS Framework"	icon="shared/mm/images/hintFunction.png" object="validateForm in dhtmlx in CAIRS"/>
+	<method pattern="_setInputInvalid( objInput )"					source="CAIRS Framework"	icon="shared/mm/images/hintFunction.png" object="_setInputInvalidin dhtmlx in CAIRS"/>
+	<method pattern="_setInputHighlighted( field, uid, DHTMLXForm )"					source="CAIRS Framework"	icon="shared/mm/images/hintFunction.png" object="_setInputHighlighted in dhtmlx in CAIRS"/>
+  </menu>
+  <menu pattern="dhtmlx." casesensitive="true" displayrestriction="JavaScript" additionaldismisschars=".;">
+	<!-- CAIRS -->
+	<menuitem label="_setInputHighlighted"	source="CAIRS Framework" 	object="CAIRS"	icon="shared/mm/images/codeHintEvent.gif"/>
+	<menuitem label="_setInputInvalid("	source="CAIRS Framework" 	object="CAIRS"	icon="shared/mm/images/codeHintEvent.gif"/>
+	<menuitem label="validateForm"	source="CAIRS Framework" 	object="CAIRS"	icon="shared/mm/images/codeHintEvent.gif"/>
+	<menuitem label="getFormDataAsPayload"	source="CAIRS Framework" 	object="CAIRS"	icon="shared/mm/images/codeHintEvent.gif"/>
+	<menuitem label="getFormItem"	source="CAIRS Framework" 	object="CAIRS"	icon="shared/mm/images/codeHintEvent.gif"/>
+	<menuitem label="_setFormMasks"	source="CAIRS Framework" 	object="CAIRS"	icon="shared/mm/images/codeHintEvent.gif"/>
+	<menuitem label="_setFormFieldsToBind"	source="CAIRS Framework" 	object="CAIRS"	icon="shared/mm/images/codeHintEvent.gif"/>
+	<menuitem label="prepareForm"	source="CAIRS Framework" 	object="CAIRS"	icon="shared/mm/images/codeHintEvent.gif"/>
+	<menuitem label="text_labels"	source="CAIRS Framework" 	object="CAIRS"	icon="shared/mm/images/codeHintEvent.gif"/>
+	<menuitem label="formFields_filled"	source="CAIRS Framework" 	object="CAIRS"	icon="shared/mm/images/codeHintEvent.gif"/>
+	<menuitem label="formFields_tofill"	source="CAIRS Framework" 	object="CAIRS"	icon="shared/mm/images/codeHintEvent.gif"/>
+	<menuitem label="formFields"	source="CAIRS Framework" 	object="CAIRS"	icon="shared/mm/images/codeHintEvent.gif"/>
   </menu>
   
   <menu classpattern="Browser" casesensitive="true" displayrestriction="JavaScript" additionaldismisschars=".;">
