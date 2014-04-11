@@ -1,4 +1,4 @@
-﻿/*===============================================*/
+/*===============================================*/
 /*
  * Copyright (c) 2010 Nick Galbreath
  * http://code.google.com/p/stringencoders/source/browse/#svn/trunk/javascript
@@ -175,8 +175,8 @@ base64.encode = function(s) {
     }
     return x.join('');
 }
-if (!window.btoa) window.btoa = base64.encode;
-if (!window.atob) window.atob = base64.decode;
+if (!window.btoa) window.btoa = base64.encode
+if (!window.atob) window.atob = base64.decode
 
 /*======================= BUILD CONSOLE OBJECT ========================*/
 // create a noop console object if the browser doesn't provide one ...
@@ -396,10 +396,10 @@ function currency_mask(input_object,which_event,number_of_digits,number_of_decim
 		}
 	}
 	else if((window.event.keyCode != 8) && (window.event.keyCode != 9) && (window.event.keyCode != 13) && (window.event.keyCode != 35) && (window.event.keyCode != 36) && (window.event.keyCode != 46))
-	{
-		window.event.cancelBubble = true;
-		window.event.returnValue = false;
-	}
+		{
+			window.event.cancelBubble = true;
+			window.event.returnValue = false;
+		}
 };
 
 function setInputInvalid(objInput)
@@ -432,55 +432,45 @@ function setSelectInvalid(objInput)
 	}
 };
 
-function currencyFormat(fld, milSep,
-    decSep, e) {
-    var sep = 0;
-    var key = '';
-    var i = j = 0;
-    var len = len2 = 0;
-    var strCheck = '0123456789';
-    var aux = aux2 = '';
-    var whichCode = (window.Event) ? e.which :
-        e.keyCode;
-    if (whichCode == 13) return true; // Enter
-    key = String.fromCharCode(whichCode); // Get key value from key code
-    if (strCheck.indexOf(key) == -1)
-        return false; // Not a valid key
-    len = fld.value.length;
-    for (i = 0; i < len; i++)
-        if ((fld.value.charAt(i) != '0') &&
-            (fld.value.charAt(i) !=
-                decSep)) break;
-    aux = '';
-    for (; i < len; i++)
-        if (strCheck.indexOf(fld.value.charAt(
-            i)) != -1) aux += fld.value
-            .charAt(i);
-    aux += key;
-    len = aux.length;
-    if (len == 0) fld.value = '';
-    if (len == 1) fld.value = '0' +
-        decSep + '0' + aux;
-    if (len == 2) fld.value = '0' +
-        decSep + aux;
-    if (len > 2) {
-        aux2 = '';
-        for (j = 0, i = len - 3; i >= 0; i--) {
-            if (j == 3) {
-                aux2 += milSep;
-                j = 0;
-            }
-            aux2 += aux.charAt(i);
-            j++;
-        }
-        fld.value = '';
-        len2 = aux2.length;
-        for (i = len2 - 1; i >= 0; i--)
-            fld.value += aux2.charAt(i);
-        fld.value += decSep + aux.substr(
-            len - 2, len);
-    }
-    return false;
+function currencyFormat(fld, milSep, decSep, e) {
+	var sep = 0;
+	var key = '';
+	var i = j = 0;
+	var len = len2 = 0;
+	var strCheck = '0123456789';
+	var aux = aux2 = '';
+	var whichCode = (window.Event) ? e.which : e.keyCode;
+	if (whichCode == 13) return true;  // Enter
+	key = String.fromCharCode(whichCode);  // Get key value from key code
+	if (strCheck.indexOf(key) == -1) return false;  // Not a valid key
+	len = fld.value.length;
+	for(i = 0; i < len; i++)
+	if ((fld.value.charAt(i) != '0') && (fld.value.charAt(i) != decSep)) break;
+	aux = '';
+	for(; i < len; i++)
+	if (strCheck.indexOf(fld.value.charAt(i))!=-1) aux += fld.value.charAt(i);
+	aux += key;
+	len = aux.length;
+	if (len == 0) fld.value = '';
+	if (len == 1) fld.value = '0'+ decSep + '0' + aux;
+	if (len == 2) fld.value = '0'+ decSep + aux;
+	if (len > 2) {
+	aux2 = '';
+	for (j = 0, i = len - 3; i >= 0; i--) {
+	if (j == 3) {
+	aux2 += milSep;
+	j = 0;
+	}
+	aux2 += aux.charAt(i);
+	j++;
+	}
+	fld.value = '';
+	len2 = aux2.length;
+	for (i = len2 - 1; i >= 0; i--)
+	fld.value += aux2.charAt(i);
+	fld.value += decSep + aux.substr(len - 2, len);
+	}
+	return false;
 }
 
 
@@ -635,6 +625,7 @@ var CAIRS = {
                     };
                 }
             }
+
 
 
             //console.log(document.getElementsByTagName('head')[0].appendChild(node));
@@ -3230,6 +3221,7 @@ var CAIRS = {
 			{
 				var self = CAIRS.MAP.API;
 				
+
 				if( typeof c.payload === 'undefined' )
 				{
 					c.payload = null;
@@ -4139,7 +4131,7 @@ var CAIRS = {
 						{
 							id = DHTMLXForm.getInput(name).getAttribute("id");
 						}
-						$("#" + id).priceFormat({ prefix: '' });
+						$("#" + id).priceFormat({ prefix: 'US ' });
 						
 					}
 					
