@@ -655,13 +655,20 @@ var CAIRS = {
             var self = CAIRS,
                 width = 688,
                 height = 400,
-                existing_div, uid, div_wrapper;
+                existing_div, 
+				uid, 
+				div_wrapper,
+				strElement = 'div';
 
             if (configuration.width) {
                 width = configuration.width;
             }
             if (configuration.height) {
                 height = configuration.height;
+            }
+			
+			if (configuration.strElement) {
+                strElement = configuration.strElement;
             }
 
             uid = configuration.uid;
@@ -684,60 +691,111 @@ var CAIRS = {
 
 
             }
+			
+			configuration.onSave = configuration.onSave || false;
+			configuration.onChange = configuration.onChange || function(ed, l) {
+						  //console.log( ed.getContent() );
+			};
 
             //console.log(existing_div);
+			//console.log( configuration.onSave );
 
             var tinyMCEConfiguration = {
-                selector: "div#" + existing_div,
-                //theme: "modern",
+                //selector: strElement + "#" + existing_div,
+                mode : "exact",
+				elements : existing_div,
+				theme : "advanced",
                 width: width,
                 height: height,
-                mode: "exact",
-                //elements: "tinymce",
-                //theme: "advanced",
-                //plugins: 'ice',
-                //content_css: "css/content.css",
-                //toolbar: "insertfile undo redo |,search,replace,|,ice_togglechanges,ice_toggleshowchanges,iceacceptall,icerejectall,iceaccept,icereject |  styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage | forecolor backcolor emoticons", 
-                //theme : "advanced",
-                //plugins : "pagebreak,style,layer,table,save,advhr,advimage,advlink,emotions,iespell,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,xhtmlxtras,template",
-                theme_advanced_buttons1: "save,newdocument,|,bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,|,styleselect,formatselect,fontselect,fontsizeselect",
-                theme_advanced_buttons2: "cut,copy,paste,pastetext,pasteword,|,search,replace,|,bullist,numlist,|,outdent,indent,blockquote,|,undo,redo,|,link,unlink,anchor,image,cleanup,help,code,|,insertdate,inserttime,preview,|,forecolor,backcolor",
-                theme_advanced_buttons3: "tablecontrols,|,hr,removeformat,visualaid,|,sub,sup,|,charmap,emotions,iespell,media,advhr,|,print,|,ltr,rtl,|,fullscreen",
-                theme_advanced_buttons4: "insertlayer,moveforward,movebackward,absolute,|,styleprops,|,cite,abbr,acronym,del,ins,attribs,|,visualchars,nonbreaking,template,pagebreak",
-                //theme_advanced_toolbar_location : "top",
-                //theme_advanced_toolbar_align : "left",
-                //theme_advanced_statusbar_location : "bottom",
-                theme_advanced_resizing: true
+				
+                plugins : "pagebreak,style,layer,table,save,advhr,advimage,advlink,emotions,iespell,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,xhtmlxtras,template,inlinepopups",
+
+				// Theme options
+				theme_advanced_buttons1 : "save,newdocument,|,bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,styleselect,formatselect,fontselect,fontsizeselect",
+				theme_advanced_buttons2 : "cut,copy,paste,pastetext,pasteword,|,search,replace,|,bullist,numlist,|,outdent,indent,blockquote,|,undo,redo,|,link,unlink,anchor,image,cleanup,code,|,insertdate,|,forecolor,backcolor",
+				theme_advanced_buttons3 : "hr,removeformat,|,sub,sup,charmap,advhr,|,ltr,rtl",
+				theme_advanced_buttons4 : "insertlayer,moveforward,movebackward,absolute,|,styleprops,|,cite,abbr,acronym,del,ins,attribs,|,visualchars,nonbreaking,template,pagebreak,restoredraft",
+				theme_advanced_toolbar_location : "top",
+				theme_advanced_toolbar_align : "left",
+				theme_advanced_statusbar_location : "bottom",
+				theme_advanced_resizing : true,
+				
+				save_enablewhendirty : true,
+				save_onsavecallback : configuration.onSave,
+				
+				
+				
+				setup : function(ed)
+				{
+				  
+					  ed.onInit.add(function(ed)
+					  {
+						  try
+						  {
+	
+						  }
+						  catch(e)
+						  {
+							  
+						  }
+					  });
+					  ed.onChange.add(configuration.onChange);
+					  ed.onSaveContent.add(function(ed, o) {
+						  // Output the element name
+						  //console.log( ed.getContent() );
+						 // console.debug(o.element.nodeName);
+						  //return false;
+					  });
+				}
+
+
+                
             }
 
 
 
             if ((typeof configuration.tinyMCEConfiguration !== 'undefined') && (configuration.tinyMCEConfiguration !== false)) {
                 for (config in configuration.tinyMCEConfiguration) {
-                    tinyMCEConfiguration[config] = configuration.tinyMCEConfiguration[config];
+                   tinyMCEConfiguration[config] = configuration.tinyMCEConfiguration[config];
                 }
             }
 
 
 
-            tinymce.init(tinyMCEConfiguration);
+            tinyMCE.init(tinyMCEConfiguration);
             return CAIRS.editor;
         },
         set: function (c) {
             if (typeof c.uid !== 'undefined') {
                 if (typeof c.content !== 'undefined') {
                     window.setTimeout(function () {
-                        tinyMCE.get("cairs_editor_wrapper_" + c.uid).setContent(c.content);
+                        try
+						{
+							tinyMCE.get("cairs_editor_wrapper_" + c.uid).setContent(c.content);
+						}
+						catch(e)
+						{
+							console.log("unable to set content");
+						}
                     }, 1000);
                 }
             }
         },
         get: function (uid) {
             if (typeof uid !== 'undefined') {
-                return encodeURIComponent(tinyMCE.get("cairs_editor_wrapper_" + uid).getContent());
+                return tinyMCE.get("cairs_editor_wrapper_" + uid).getContent();
             } else {
                 return null;
             }
+        },
+		destroy: function (uid) {
+            try
+			{
+				tinyMCE.get("cairs_editor_wrapper_" + uid).remove();
+			}catch(e)
+			{
+				//console.log("not destroyed");
+			}
         }
 
     }
@@ -1537,6 +1595,12 @@ var CAIRS = {
 
     ,
     isValidDate: function (d) {
+        if (Object.prototype.toString.call(d) !== "[object Date]")
+            return false;
+        return !isNaN(d.getTime());
+    }
+	
+	,isDate: function (d) {
         if (Object.prototype.toString.call(d) !== "[object Date]")
             return false;
         return !isNaN(d.getTime());
@@ -2650,7 +2714,7 @@ var CAIRS = {
 		Socket : []
 		,isConnected : []
 		,clientID : []
-		,defaultTopic : "welcome"
+		,defaultRouting_key : "welcome"
 		,defaultPipe : "main pipe"
 		,connect : function( configuration ){
 			var self = CAIRS.socket;
@@ -2670,15 +2734,21 @@ var CAIRS = {
 				{
 					self.Socket[ configuration.pipe ] = new WebSocket( configuration.resource );
 			
-					self.Socket[ configuration.pipe ].onopen = function( messageEvent ) 
+					self.Socket[ configuration.pipe ].onopen = function(  ) 
 					{
-						console.log(messageEvent);
+						//console.log(arguments);
 						self.isConnected[ configuration.pipe ] = true;
 						
-						//already subscribed to welcome topic via on_new_listenerss
-						self.Socket[ configuration.pipe ].Send( 'subscribed to welcome topic via on_new_listeners' );
+						//already subscribed to welcome routing_key via on_new_listenerss
+						//self.Socket[ configuration.pipe ].Send( 'subscribed to welcome routing_key via on_new_listeners' );
 						
-						if( configuration.onOpen ) configuration.onOpen();
+						/*self.Socket[ configuration.pipe ].Send( {
+							type : 'id'// message, subscribe    -> mandatory
+							,message : 'subscribing'
+						} );*/
+						
+						
+						if( configuration.onOpen ) configuration.onOpen(arguments);
 					};
 					
 					self.Socket[ configuration.pipe ].onclose = function( messageEvent ) 
@@ -2692,14 +2762,25 @@ var CAIRS = {
 					};
 					
 					self.Socket[ configuration.pipe ].onmessage = function( messageEvent ) {
+						//console.log( messageEvent );
 						var data = JSON.parse( messageEvent.data );
 						if( data )
 						{
-							if(data.client_id)
-							{
-								self.clientID[ configuration.pipe ] = data.client_id;
+							
+							if (data.type && data.type == "hippie.pipe.set_client_id") {
+								if(data.client_id)
+								{
+									self.clientID[ configuration.pipe ] = data.client_id;
+								}
 							}
+							else
+							{
+								
+							}
+							
+							
 							if( configuration.onMessage ) configuration.onMessage( data, messageEvent );
+							
 						}
 						else
 							if( configuration.onMessage ) configuration.onMessage( { msg : "no data when onMessage"}, messageEvent );
@@ -2707,31 +2788,41 @@ var CAIRS = {
 						
 					/*self.Socket[ configuration.pipe ].Send = self.Socket[ configuration.pipe ].send;*/
 					
-					self.Socket[ configuration.pipe ].Send = function( m )
+					self.Socket[ configuration.pipe ].Send = function( m, callBack )
 					{
+						
 						try
 						{
-							if( configuration.onBeforeSend ) configuration.onBeforeSend( );
+							if( configuration.onBeforeSend ) configuration.onBeforeSend( m );
 							if( CAIRS.isObject( m ) )
 							{
+								//console.log("im object");
 								if( typeof m["message"] === 'undefined' )
 								{
 									dhtmlx.message( {type : "error", text : "Hey Mark, I can't send an empty message"} );
 									return;
 								}
-								if( typeof m["topic"] === 'undefined' )
-									m["topic"] = self.defaultTopic;
+								if( typeof m["routing_key"] === 'undefined' )
+									m["routing_key"] = self.defaultRouting_key;
+									
 								if( typeof m["type"] === 'undefined' )
 									m["type"] = "message";
-								if( m["type"] != 'message' &&  m["type"] != 'subscribe' )
-									m["type"] = "message";
+									
+								//console.log( m );
+								
+								//var dataObj = JSON.parse( m["data"] ) ;
+								//if( typeof dataObj["type"] === 'undefined' )
+								//	dataObj["type"] = m["type"];
+									
+								//m["data"] = JSON.stringify( dataObj );
+									
 								m = JSON.stringify( m );
 							}
 							else
 							{
 								if(m && m != null && m != "")
 								{
-									m = JSON.stringify( { type : "message", message : m, topic : self.defaultTopic } );
+									m = JSON.stringify( { type : "message", message : m, routing_key : self.defaultRouting_key } );
 								}
 								else
 								{
@@ -2740,8 +2831,9 @@ var CAIRS = {
 								}
 							}
 							m = JSON.stringify({ msg: m  });
-							console.log( m );
+							//console.log( m );
 							self.Socket[ configuration.pipe ].send( m );
+							//console.log(m);
 						}
 						catch(e)
 						{
@@ -2754,6 +2846,7 @@ var CAIRS = {
 					self.Socket[ configuration.pipe ].Close = function( )
 					{
 						if( configuration.onBeforeClose ) configuration.onBeforeClose( self.clientID[ configuration.pipe ] );
+						
 						self.Socket[ configuration.pipe ].Send( 
 						{ 
 							type : "disconnect"
@@ -2798,9 +2891,9 @@ var CAIRS = {
 		,disconnectAll : function()
 		{
 			var self = CAIRS.socket;
-			for( var topic in self.Socket )
+			for( var routing_key in self.Socket )
 			{
-				self.Socket[ topic ].Close();
+				self.Socket[ routing_key ].Close();
 			}
 		}
 	}
@@ -2809,7 +2902,7 @@ var CAIRS = {
 	
 	var msg = {
 		type : ""	// message, subscribe, disconnect    -> mandatory
-		,topic : ""			-> mandatory when type = subscribe
+		,routing_key : ""			-> mandatory when type = subscribe
 		,message : ""
 		
 	}
@@ -2817,7 +2910,7 @@ var CAIRS = {
 	var socket = CAIRS.socket.connect(
 	{
 		resource : 	"ws://192.168.1.33:5000/_hippie/ws"
-		,topic : "users online"
+		,routing_key : "users online"
 		,onOpen : function( messageEvent ){
 			
 		}
@@ -2873,9 +2966,14 @@ var CAIRS = {
 		
 			,version : 0.1
 			
-			,apiURL : "http://perltest.myadoptionportal.com"
+			,apiURL : "https://perltest.myadoptionportal.com/"
 			
 			,token : "-"
+			
+			,database : ""
+			
+			,agency_id : 0
+			
 			,date_expiration : 0
 			
 			,user : "nobody"
@@ -2920,7 +3018,7 @@ var CAIRS = {
 				if( params != "")
 					params = "&" + params
 				
-				return self.apiURL + "" + resource + "." + type + "?token=" + self.token + params;
+				return self.apiURL + "" + resource + "." + type + "?database=" + self.database + "&token=" + self.token + params;
 			}
 		
 			,XMLHttpFactories : [
@@ -3038,7 +3136,7 @@ var CAIRS = {
 						//console.log( json.sync );
 						if( json.sync )
 						{
-							self.request.open( json.method, json.url, false );	// set async = false forcing to execute each url provided in queue
+							self.request.open( json.method, json.url, true );	// set async = false forcing to execute each url provided in queue
 							//console.log("I'm sync");
 						}
 						else
@@ -3147,7 +3245,7 @@ var CAIRS = {
 							if (self.request.status == 0) 
 							{
 								console.log("error: request status: " + self.request.status + ". could not reach " + json.url)
-								dhtmlx.message( {type : "error", text : "could not reach " + json.url} );
+								//dhtmlx.message( {type : "error", text : "could not reach " + json.url} );
 								if( json.error )	json.error( self.request );
 								return;
 							}
@@ -3262,7 +3360,7 @@ var CAIRS = {
 				
 				self.ajax({
 					method : "POST",	
-					url : self.apiURL + c.resource + "." + c.format + "?token=" + self.token,
+					url : self.apiURL + c.resource + "." + c.format + "?database=" + self.database + "&token=" + self.token,
 					payload : c.payload,
 					success : c.onSuccess,
 					error : c.onFail,
@@ -3314,7 +3412,7 @@ var CAIRS = {
 				
 				self.ajax({
 					method : "PUT",	
-					url : self.apiURL + c.resource + "." + c.format + "?token=" + self.token,
+					url : self.apiURL + c.resource + "." + c.format + "?database=" + self.database + "&token=" + self.token,
 					payload : c.payload,
 					success : c.onSuccess,
 					error : c.onFail,
@@ -3367,11 +3465,11 @@ var CAIRS = {
 				
 				if(c.payload == "")
 				{
-					fURL = self.apiURL + c.resource + "." + c.format + "?token=" + self.token;
+					fURL = self.apiURL + c.resource + "." + c.format + "?database=" + self.database + "&token=" + self.token;
 				}
 				else
 				{
-					fURL = self.apiURL + c.resource + "." + c.format + "?token=" + self.token + "&" + c.payload
+					fURL = self.apiURL + c.resource + "." + c.format + "?database=" + self.database + "&token=" + self.token + "&" + c.payload
 				}
 				
 				if( typeof c.sync === 'undefined' )
@@ -3402,7 +3500,10 @@ var CAIRS = {
 				var self = CAIRS.MAP.API;
 				
 				// DELETE does not send payloads
-				c.payload = null;
+				if( typeof c.payload === 'undefined' )
+				{
+					c.payload = null;
+				}
 				
 				if( !CAIRS.isFunction( c.onSuccess ) )
 				{
@@ -3428,11 +3529,21 @@ var CAIRS = {
 				{
 					c.sync = false;
 				}
+				var url;
+				
+				if( typeof c.payload === 'undefined' )
+				{
+					url =  self.apiURL + c.resource + "." + c.format + "?database=" + self.database + "&token=" + self.token;
+				}
+				else
+				{
+					url =  self.apiURL + c.resource + "." + c.format + "?database=" + self.database + "&token=" + self.token + "&" + c.payload;
+				}
 				
 				self.ajax({
 					method : "DELETE",	
-					url : self.apiURL + c.resource + "." + c.format + "?token=" + self.token,
-					payload : c.payload,
+					url : url,
+					payload : null,
 					success : c.onSuccess,
 					error : c.onFail,
 					format : c.format,
@@ -3440,6 +3551,40 @@ var CAIRS = {
 				});
 			}
 			
+			,showCountDown : function( elementID )
+			{
+				// set the date we're counting down to
+				var target_date = parseInt( CAIRS.MAP.API.date_expiration );
+				 
+				// variables for time units
+				var days, hours, minutes, seconds;
+				 
+				// get tag element
+				var countdown = document.getElementById(elementID);
+				 
+				// update the tag with id "countdown" every 1 second
+				window.setInterval(function () {
+				 
+					// find the amount of "seconds" between now and target
+					var current_date = new Date().getTime();
+					var seconds_left = (target_date - current_date) / 1000;
+				 
+					// do some time calculations
+					days = parseInt(seconds_left / 86400);
+					seconds_left = seconds_left % 86400;
+					 
+					hours = parseInt(seconds_left / 3600);
+					seconds_left = seconds_left % 3600;
+					 
+					minutes = parseInt(seconds_left / 60);
+					seconds = parseInt(seconds_left % 60);
+					 
+					// format countdown string + set tag value
+					countdown.innerHTML = /*days + "d, " +*/ hours + "h, "
+					+ minutes + "m, " + seconds + "s";  
+				 
+				}, 1000);	
+			}
 			
 			,authorize : function( c )
 			{
@@ -3451,13 +3596,29 @@ var CAIRS = {
 					return;	
 				}
 				
+				if( typeof c.database === 'undefined' )
+				{
+					dhtmlx.message( {type : "error", text : "application needs a database to authenticate" } ); // 
+					return;	
+				}
+				else
+					CAIRS.MAP.API.database = c.database;
+					
+				if( typeof c.agency_id === 'undefined' )
+				{
+					dhtmlx.message( {type : "error", text : "application needs an agency_id to authenticate" } ); // 
+					return;	
+				}
+				else
+					CAIRS.MAP.API.agency_id = c.agency_id;
+				
 				c.onSuccess = c.onSuccess || false;
 				c.onFail = c.onFail || false;
 				
 				function success(request)
 				{
 					CAIRS.hideDirections();
-					var response = eval('(' + self.request.response + ')');
+					var response = JSON.parse( self.request.response );
 					
 					//console.log(response.auth_data);
 					
@@ -3483,7 +3644,7 @@ var CAIRS = {
 				
 				self.ajax({
 					method : "POST",	
-					url : self.apiURL + "/auth.json",
+					url : self.apiURL + "/auth.json?database=" + self.database,
 					payload : "username=" + CAIRS.crypt.SHA2( c.username ),
 					success : success,
 					error : fail,
@@ -3917,7 +4078,7 @@ var CAIRS = {
 			
 			self.formFields[ uid ] = []; // clean the array of formFields
 			
-			self.formFields_tofill[uid] = 0;
+			self.formFields_tofill[ uid ] = 0;
 			
 			self._setFormFieldsToBind( JSONformConfiguration.template, uid );
 			
@@ -3991,6 +4152,18 @@ var CAIRS = {
 						continue; // discard the item
 					}
 					
+					try
+					{
+						if(typeof self.formFields[ uid ] === 'undefined')
+						{
+							self.formFields[ uid ] = [];	
+						}
+					}
+					catch(e)
+					{
+						//console.log("if(! self.formFields[ uid ]) === " + e.message);
+					}
+					
 					// if the item has a "block" type, we need to catch the items inside of the list property of the block
 					if(type == "block")
 					{
@@ -4026,10 +4199,14 @@ var CAIRS = {
 						//{
 							if(appended_on_the_fly)
 							{
+								self.formFields[ uid ].unshift( formField );
+								self.formFields_tofill[uid] = self.formFields_tofill[uid] + 1;
 								self._setFormFieldsToBind( formField.list, uid, true ); // use this same function to catch the items inside of the list
 							}
 							else
 							{
+								self.formFields[ uid ].push( formField );
+								self.formFields_tofill[uid] = self.formFields_tofill[uid] + 1;
 								self._setFormFieldsToBind( formField.list, uid ); // use this same function to catch the items inside of the list
 							}
 						//}
@@ -4052,20 +4229,6 @@ var CAIRS = {
 					// if not, we push the formfield into the self.formFields[ uid ] array
 					else
 					{
-						try
-						{
-							if(! self.formFields[ uid ])
-							{
-								self.formFields[ uid ] = [];	
-							}
-						}
-						catch(e)
-						{
-							//console.log("if(! self.formFields[ uid ]) === " + e.message);
-						}
-						
-						
-						
 						if(appended_on_the_fly)
 						{
 							self.formFields[ uid ].unshift( formField );
