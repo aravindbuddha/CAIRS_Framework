@@ -581,9 +581,12 @@ var CAIRS = {
         var self = this,
             arrType, type, s, nodeType, node;
 
-        //console.log("lScript");
+        console.log("lScript");
+		console.log(url);
+		console.log(document.getElementById(url));
 
-        if (typeof document.getElementById(url) !== null) {
+        if ( document.getElementById(url) == null)
+		{
 
             arrType = url.split(".");
             type = arrType[arrType.length - 1];
@@ -643,6 +646,11 @@ var CAIRS = {
             //s = document.getElementsByTagName('script')[0];
             //s.parentNode.insertBefore(node, s);
         }
+		else
+		{
+			console.log("already exist");
+			callback();
+		}
     }
     /* load script - code injection */
 
