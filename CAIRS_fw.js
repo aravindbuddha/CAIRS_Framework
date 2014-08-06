@@ -534,10 +534,12 @@ var CAIRS = {
     }
     /* load javascript files - code injection */
 
-
+	
+	,environment : "production"
     ,
     onDemand: {
         queue: [],
+		
         load: function (url, callback) {
             var self = CAIRS.onDemand;
 
@@ -546,8 +548,17 @@ var CAIRS = {
 			CAIRS.exposeForEach();
 
             if (CAIRS.isArray(url)) {
+				
+				//?uid=" + (new Date()).getTime()
+				
+				
+				
                 url.forEach(function (path, index, array) {
-                    self.queue.push(path);
+                    
+					if(CAIRS.environment == "dev")
+						self.queue.push( path + "?uistring=" + (new Date()).getTime() );
+					else
+						self.queue.push(path);
 
                 });
             } else {
@@ -579,11 +590,11 @@ var CAIRS = {
     ,
     lScript: function (url, callback) {
         var self = this,
-            arrType, type, s, nodeType, node;
+            arrType, type, s, nodeType, node, tag_id = url.split("?")[0];
 
-        console.log("lScript");
-		console.log(url);
-		console.log(document.getElementById(url));
+        //console.log("lScript");
+		//console.log(url);
+		//console.log(document.getElementById(url));
 
         if ( document.getElementById(url) == null)
 		{
@@ -612,6 +623,7 @@ var CAIRS = {
 				else
 					node.setAttribute("src", url);
             }
+			
 
             node.setAttribute("id", url);
 
@@ -622,6 +634,7 @@ var CAIRS = {
                         node.readyState == 'complete') {
                         //console.log("loaded");
                         node.onreadystatechange = null;
+						//console.log("loaded  " + url);
                         callback();
                     }
                 };
@@ -634,6 +647,7 @@ var CAIRS = {
                     //console.log(node.onload);
                     node.onload = function () {
                         //console.log("loaded");
+						//console.log("loaded  " + url);
                         callback();
                     };
                 }
@@ -648,7 +662,7 @@ var CAIRS = {
         }
 		else
 		{
-			console.log("already exist");
+			//console.log("already exist");
 			callback();
 		}
     }
